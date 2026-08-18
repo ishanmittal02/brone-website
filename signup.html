@@ -7,7 +7,6 @@
 <title>Create Account | BRONE</title>
 
 <style>
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -131,7 +130,6 @@ button:disabled {
     margin-top: 18px;
     text-align: center;
 }
-
 </style>
 </head>
 
@@ -152,38 +150,22 @@ button:disabled {
         <form id="signup-form">
 
             <label>FULL NAME</label>
-            <input
-                id="fullname"
-                type="text"
-                placeholder="Enter your full name"
-                required
-            >
+            <input id="fullname" type="text"
+                   placeholder="Enter your full name" required>
 
             <label>EMAIL ADDRESS</label>
-            <input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                required
-            >
+            <input id="email" type="email"
+                   placeholder="you@example.com" required>
 
             <label>PASSWORD</label>
-            <input
-                id="password"
-                type="password"
-                placeholder="Create a password"
-                minlength="6"
-                required
-            >
+            <input id="password" type="password"
+                   placeholder="Create a password"
+                   minlength="6" required>
 
             <label>CONFIRM PASSWORD</label>
-            <input
-                id="confirm-password"
-                type="password"
-                placeholder="Confirm your password"
-                minlength="6"
-                required
-            >
+            <input id="confirm-password" type="password"
+                   placeholder="Confirm your password"
+                   minlength="6" required>
 
             <button id="signup-button" type="submit">
                 CREATE ACCOUNT
@@ -210,35 +192,26 @@ button:disabled {
 
 </div>
 
-
-<!-- SUPABASE -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-const SUPABASE_URL = "https://dvciwdppcmgivolbeev.supabase.co";
+const SUPABASE_URL = "https://dvcidwppcmgmivolbeev.supabase.co";
 
-const SUPABASE_KEY = "sb_publishable_y-wXyEcwepxCc5h_uiAFw_sFnJb7L_";
-
+const SUPABASE_KEY = "sb_publishable_y-ywXyEcwepxCc5h_uiAFw_sFnJb7L_";
 
 const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
 
-
 const form = document.getElementById("signup-form");
-
 const message = document.getElementById("message");
-
 const button = document.getElementById("signup-button");
-
 
 form.addEventListener("submit", async function(event) {
 
     event.preventDefault();
-
 
     const fullname =
         document.getElementById("fullname").value.trim();
@@ -253,30 +226,20 @@ form.addEventListener("submit", async function(event) {
         document.getElementById("confirm-password").value;
 
 
-    /* CHECK PASSWORD */
-
     if (password !== confirmPassword) {
 
         message.style.color = "#ff5555";
-
-        message.textContent =
-            "Passwords do not match.";
+        message.textContent = "Passwords do not match.";
 
         return;
     }
 
 
-    /* LOADING */
-
     message.style.color = "white";
-
-    message.textContent =
-        "Creating your BRONE account...";
+    message.textContent = "Creating your BRONE account...";
 
     button.disabled = true;
-
-    button.textContent =
-        "CREATING ACCOUNT...";
+    button.textContent = "CREATING ACCOUNT...";
 
 
     try {
@@ -289,38 +252,25 @@ form.addEventListener("submit", async function(event) {
                 password: password,
 
                 options: {
-
                     data: {
-
                         full_name: fullname
-
                     }
-
                 }
 
             });
 
 
-        /* ERROR */
-
         if (error) {
 
             message.style.color = "#ff5555";
-
-            message.textContent =
-                "Error: " + error.message;
+            message.textContent = "Error: " + error.message;
 
             button.disabled = false;
-
-            button.textContent =
-                "CREATE ACCOUNT";
+            button.textContent = "CREATE ACCOUNT";
 
             return;
-
         }
 
-
-        /* SUCCESS */
 
         message.style.color = "#55ff88";
 
@@ -330,9 +280,7 @@ form.addEventListener("submit", async function(event) {
         form.reset();
 
         button.disabled = false;
-
-        button.textContent =
-            "CREATE ACCOUNT";
+        button.textContent = "CREATE ACCOUNT";
 
 
     } catch (error) {
@@ -343,9 +291,7 @@ form.addEventListener("submit", async function(event) {
             "Something went wrong: " + error.message;
 
         button.disabled = false;
-
-        button.textContent =
-            "CREATE ACCOUNT";
+        button.textContent = "CREATE ACCOUNT";
 
     }
 
