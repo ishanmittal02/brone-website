@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard | BRONE</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080808;
+    color: #fff;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    width: 250px;
+    height: 100vh;
+    border-right: 1px solid #222;
+    padding: 35px 25px;
+    background: #0b0b0b;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 7px;
+    margin-bottom: 70px;
+}
+
+.menu a {
+    display: block;
+    color: #777;
+    text-decoration: none;
+    padding: 14px 0;
+    font-size: 14px;
+}
+
+.menu a:hover,
+.menu a.active {
+    color: white;
+}
+
+/* Main */
+.main {
+    margin-left: 250px;
+    padding: 50px;
+    min-height: 100vh;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.topbar h1 {
+    font-size: 32px;
+}
+
+.profile {
+    color: #aaa;
+    font-size: 14px;
+}
+
+.label {
+    color: #666;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 60px;
+}
+
+.card {
+    background: #101010;
+    border: 1px solid #242424;
+    padding: 25px;
+}
+
+.card h3 {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.change {
+    margin-top: 8px;
+    color: #aaa;
+    font-size: 13px;
+}
+
+/* Research */
+.research {
+    border-top: 1px solid #222;
+    padding-top: 40px;
+}
+
+.research h2 {
+    font-size: 26px;
+    margin-bottom: 25px;
+}
+
+.research-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #222;
+    padding: 25px 0;
+}
+
+.research-item p {
+    color: #666;
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+.read {
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 20px;
+    }
+
+    .logo {
+        margin-bottom: 20px;
+    }
+
+    .menu {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+    }
+
+    .menu a {
+        white-space: nowrap;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 30px 20px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">BRONE</div>
+
+    <nav class="menu">
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="#">Markets</a>
+        <a href="#">Research</a>
+        <a href="#">Watchlist</a>
+        <a href="#">Profile</a>
+        <a href="index.html">Back to Website</a>
+    </nav>
+
+</aside>
+
+<main class="main">
+
+    <div class="topbar">
+        <div>
+            <div class="label">BRONE TERMINAL</div>
+            <h1>Market Overview</h1>
+        </div>
+
+        <div class="profile">
+            Guest User
+        </div>
+    </div>
+
+    <div class="label">MARKETS</div>
+
+    <section class="cards">
+
+        <div class="card">
+            <h3>XAU/USD</h3>
+            <div class="price">Loading...</div>
+            <div class="change">Gold Market</div>
+        </div>
+
+        <div class="card">
+            <h3>S&P 500</h3>
+            <div class="price">Loading...</div>
+            <div class="change">US Equities</div>
+        </div>
+
+        <div class="card">
+            <h3>USD/INR</h3>
+            <div class="price">Loading...</div>
+            <div class="change">Foreign Exchange</div>
+        </div>
+
+        <div class="card">
+            <h3>BTC/USD</h3>
+            <div class="price">Loading...</div>
+            <div class="change">Digital Assets</div>
+        </div>
+
+    </section>
+
+    <section class="research">
+
+        <div class="label">LATEST RESEARCH</div>
+
+        <h2>Research & Insights</h2>
+
+        <div class="research-item">
+            <div>
+                <h3>Global Macro Outlook</h3>
+                <p>Analysis of economic trends and global markets.</p>
+            </div>
+
+            <a href="#" class="read">COMING SOON →</a>
+        </div>
+
+        <div class="research-item">
+            <div>
+                <h3>Gold Market Analysis</h3>
+                <p>Research and observations from the commodities market.</p>
+            </div>
+
+            <a href="#" class="read">COMING SOON →</a>
+        </div>
+
+        <div class="research-item">
+            <div>
+                <h3>Market Strategy</h3>
+                <p>Perspectives on market conditions and risk.</p>
+            </div>
+
+            <a href="#" class="read">COMING SOON →</a>
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+</html>
