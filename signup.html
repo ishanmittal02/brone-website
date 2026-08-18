@@ -1,127 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Create Account | BRONE</title>
+<title>Create Account | BRONE</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #050505;
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #050505;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .container {
-            width: 100%;
-            max-width: 420px;
-            padding: 25px;
-        }
+.container {
+    width: 100%;
+    max-width: 420px;
+    padding: 25px;
+}
 
-        .logo {
-            text-align: center;
-            font-size: 30px;
-            font-weight: bold;
-            letter-spacing: 8px;
-            margin-bottom: 50px;
-        }
+.logo {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 8px;
+    margin-bottom: 50px;
+}
 
-        .signup-box {
-            border: 1px solid #242424;
-            padding: 45px 35px;
-            background: #0a0a0a;
-        }
+.signup-box {
+    border: 1px solid #242424;
+    padding: 45px 35px;
+    background: #0a0a0a;
+}
 
-        h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
+h1 { font-size: 32px; margin-bottom: 10px; }
 
-        .subtitle {
-            color: #777;
-            margin-bottom: 35px;
-            font-size: 14px;
-            line-height: 1.6;
-        }
+.subtitle {
+    color: #777;
+    margin-bottom: 35px;
+    font-size: 14px;
+    line-height: 1.6;
+}
 
-        label {
-            display: block;
-            font-size: 11px;
-            letter-spacing: 1.5px;
-            color: #aaa;
-            margin-bottom: 9px;
-        }
+label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #aaa;
+    margin-bottom: 9px;
+}
 
-        input {
-            width: 100%;
-            background: #111;
-            border: 1px solid #292929;
-            color: white;
-            padding: 15px;
-            margin-bottom: 20px;
-            font-size: 15px;
-            outline: none;
-        }
+input {
+    width: 100%;
+    background: #111;
+    border: 1px solid #292929;
+    color: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    outline: none;
+}
 
-        input:focus {
-            border-color: #777;
-        }
+input:focus { border-color: #777; }
 
-        button {
-            width: 100%;
-            padding: 16px;
-            background: white;
-            color: black;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 5px;
-        }
+button {
+    width: 100%;
+    padding: 16px;
+    background: white;
+    color: black;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+}
 
-        button:hover {
-            opacity: 0.9;
-        }
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
 
-        .bottom-text {
-            text-align: center;
-            margin-top: 28px;
-            color: #777;
-            font-size: 14px;
-        }
+.bottom-text {
+    text-align: center;
+    margin-top: 28px;
+    color: #777;
+    font-size: 14px;
+}
 
-        .bottom-text a {
-            color: white;
-            text-decoration: none;
-        }
+.bottom-text a,
+.back {
+    color: white;
+    text-decoration: none;
+}
 
-        .back {
-            display: block;
-            text-align: center;
-            margin-top: 30px;
-            color: #777;
-            font-size: 13px;
-            text-decoration: none;
-        }
+.back {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    color: #777;
+    font-size: 13px;
+}
 
-        .terms {
-            font-size: 11px;
-            color: #666;
-            line-height: 1.6;
-            margin-top: 18px;
-            text-align: center;
-        }
-    </style>
+.message {
+    margin-top: 18px;
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 20px;
+}
+
+.terms {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.6;
+    margin-top: 18px;
+    text-align: center;
+}
+</style>
 </head>
 
 <body>
@@ -138,25 +137,31 @@
             Join BRONE and access market insights, research and your personal dashboard.
         </p>
 
-        <form>
+        <form id="signup-form">
 
             <label>FULL NAME</label>
-            <input type="text" placeholder="Enter your full name" required>
+            <input id="fullname" type="text"
+                   placeholder="Enter your full name" required>
 
             <label>EMAIL ADDRESS</label>
-            <input type="email" placeholder="you@example.com" required>
+            <input id="email" type="email"
+                   placeholder="you@example.com" required>
 
             <label>PASSWORD</label>
-            <input type="password" placeholder="Create a password" required>
+            <input id="password" type="password"
+                   placeholder="Create a password" minlength="6" required>
 
             <label>CONFIRM PASSWORD</label>
-            <input type="password" placeholder="Confirm your password" required>
+            <input id="confirm-password" type="password"
+                   placeholder="Confirm your password" minlength="6" required>
 
-            <button type="submit">
+            <button id="signup-button" type="submit">
                 CREATE ACCOUNT
             </button>
 
         </form>
+
+        <div id="message" class="message"></div>
 
         <p class="terms">
             By creating an account, you agree to BRONE's Terms and Privacy Policy.
@@ -174,6 +179,67 @@
     </a>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+    // PASTE YOUR SUPABASE DETAILS HERE
+    const SUPABASE_URL = "https://dvcidwppcmgmivolbeev.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_y-ywXyEcwepxCc5h_uiAFw_sFnJb7L_";
+
+    const supabase = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+    const form = document.getElementById("signup-form");
+    const message = document.getElementById("message");
+    const button = document.getElementById("signup-button");
+
+    form.addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const fullname = document.getElementById("fullname").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword =
+            document.getElementById("confirm-password").value;
+
+        if (password !== confirmPassword) {
+            message.textContent = "Passwords do not match.";
+            return;
+        }
+
+        message.textContent = "";
+        button.disabled = true;
+        button.textContent = "CREATING ACCOUNT...";
+
+        const { data, error } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+            options: {
+                data: {
+                    full_name: fullname
+                }
+            }
+        });
+
+        if (error) {
+            message.textContent = error.message;
+            button.disabled = false;
+            button.textContent = "CREATE ACCOUNT";
+            return;
+        }
+
+        message.textContent =
+            "Account created successfully. Please check your email to verify your account.";
+
+        form.reset();
+        button.disabled = false;
+        button.textContent = "CREATE ACCOUNT";
+    });
+</script>
 
 </body>
 </html>
