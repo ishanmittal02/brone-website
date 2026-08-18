@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,277 +8,905 @@
 <title>Dashboard | BRONE</title>
 
 <style>
+
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #050505;
+    --panel: #0b0b0b;
+    --border: #222;
+    --text: #ffffff;
+    --muted: #777;
+    --dim: #444;
 }
 
 body {
+    background: var(--bg);
+    color: var(--text);
     font-family: Arial, Helvetica, sans-serif;
-    background: #080808;
-    color: #fff;
-}
-
-/* Sidebar */
-.sidebar {
-    position: fixed;
-    width: 250px;
-    height: 100vh;
-    border-right: 1px solid #222;
-    padding: 35px 25px;
-    background: #0b0b0b;
-}
-
-.logo {
-    font-size: 25px;
-    font-weight: bold;
-    letter-spacing: 7px;
-    margin-bottom: 70px;
-}
-
-.menu a {
-    display: block;
-    color: #777;
-    text-decoration: none;
-    padding: 14px 0;
-    font-size: 14px;
-}
-
-.menu a:hover,
-.menu a.active {
-    color: white;
-}
-
-/* Main */
-.main {
-    margin-left: 250px;
-    padding: 50px;
     min-height: 100vh;
 }
 
-.topbar {
+/* BACKGROUND */
+
+.background-grid {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+
+    background-size: 60px 60px;
+}
+
+.glow {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: white;
+    filter: blur(180px);
+    opacity: 0.035;
+    z-index: -1;
+    top: -250px;
+    right: -150px;
+}
+
+/* NAVIGATION */
+
+nav {
+    height: 75px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6%;
+    background: rgba(5,5,5,0.85);
+    backdrop-filter: blur(15px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 7px;
+}
+
+.user-area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-info {
+    text-align: right;
+}
+
+.user-name {
+    font-size: 13px;
+}
+
+.user-email {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+.logout {
+    background: transparent;
+    color: white;
+    border: 1px solid #333;
+    padding: 11px 17px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.logout:hover {
+    background: white;
+    color: black;
+    border-color: white;
+}
+
+/* DASHBOARD */
+
+.dashboard {
+    max-width: 1450px;
+    margin: auto;
+    padding: 70px 6%;
+}
+
+.eyebrow {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 4px;
+}
+
+h1 {
+    font-size: clamp(45px, 7vw, 90px);
+    letter-spacing: -5px;
+    margin-top: 18px;
+    line-height: 0.95;
+}
+
+.subtitle {
+    color: var(--muted);
+    max-width: 650px;
+    line-height: 1.8;
+    margin-top: 25px;
+}
+
+/* STATUS */
+
+.status-bar {
+    margin-top: 55px;
+    border: 1px solid var(--border);
+    background: rgba(10,10,10,0.8);
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 12px white;
+}
+
+.status-text {
+    letter-spacing: 1px;
+}
+
+/* STATS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.stat-card {
+    background: rgba(10,10,10,0.85);
+    border: 1px solid var(--border);
+    padding: 28px;
+    min-height: 180px;
+    transition: 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: #555;
+}
+
+.stat-label {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.stat-value {
+    font-size: 38px;
+    margin-top: 45px;
+    letter-spacing: -2px;
+}
+
+.stat-info {
+    color: var(--dim);
+    font-size: 11px;
+    margin-top: 10px;
+}
+
+/* GRID */
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.panel {
+    border: 1px solid var(--border);
+    background: rgba(10,10,10,0.85);
+    padding: 32px;
+}
+
+.panel-title {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 2.5px;
+}
+
+.panel-subtitle {
+    font-size: 22px;
+    margin-top: 12px;
+}
+
+/* CHART */
+
+.chart-area {
+    height: 320px;
+    margin-top: 35px;
+    position: relative;
+    border-bottom: 1px solid #222;
+    border-left: 1px solid #222;
+    overflow: hidden;
+}
+
+.chart-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 20% 25%;
+}
+
+.chart-area svg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.chart-line {
+    fill: none;
+    stroke: white;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1500;
+    stroke-dashoffset: 1500;
+    animation: drawChart 3s ease forwards;
+}
+
+@keyframes drawChart {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* WATCHLIST */
+
+.watchlist {
+    margin-top: 25px;
+}
+
+.watch-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 60px;
+    border-bottom: 1px solid #222;
+    padding: 20px 0;
 }
 
-.topbar h1 {
-    font-size: 32px;
+.watch-item:last-child {
+    border-bottom: none;
 }
 
-.profile {
-    color: #aaa;
+.asset-name {
+    font-size: 15px;
+}
+
+.asset-symbol {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+.asset-right {
+    text-align: right;
+}
+
+.asset-price {
     font-size: 14px;
 }
 
-.label {
-    color: #666;
-    font-size: 11px;
-    letter-spacing: 3px;
-    margin-bottom: 15px;
+.asset-status {
+    color: var(--dim);
+    font-size: 10px;
+    margin-top: 6px;
 }
 
-.cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-    margin-bottom: 60px;
+/* RESEARCH */
+
+.research-section {
+    margin-top: 15px;
 }
 
-.card {
-    background: #101010;
-    border: 1px solid #242424;
-    padding: 25px;
-}
-
-.card h3 {
-    font-size: 13px;
-    color: #777;
-    margin-bottom: 20px;
-}
-
-.price {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.change {
-    margin-top: 8px;
-    color: #aaa;
-    font-size: 13px;
-}
-
-/* Research */
-.research {
+.research-list {
+    margin-top: 25px;
     border-top: 1px solid #222;
-    padding-top: 40px;
-}
-
-.research h2 {
-    font-size: 26px;
-    margin-bottom: 25px;
 }
 
 .research-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #222;
     padding: 25px 0;
+    border-bottom: 1px solid #222;
+    transition: 0.3s;
 }
 
-.research-item p {
-    color: #666;
-    font-size: 13px;
-    margin-top: 7px;
+.research-item:hover {
+    padding-left: 12px;
+    background: rgba(255,255,255,0.015);
 }
 
-.read {
-    color: white;
-    text-decoration: none;
-    font-size: 12px;
+.research-left {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.research-number {
+    color: #444;
+    font-size: 11px;
+}
+
+.research-tag {
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.research-title {
+    margin-top: 8px;
+    font-size: 17px;
+}
+
+.coming-soon {
+    color: #555;
+    font-size: 10px;
     letter-spacing: 1px;
 }
 
-/* Mobile */
-@media (max-width: 900px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        padding: 20px;
-    }
+/* QUICK ACTIONS */
 
-    .logo {
-        margin-bottom: 20px;
-    }
+.actions {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
 
-    .menu {
-        display: flex;
-        gap: 20px;
-        overflow-x: auto;
-    }
+.action-card {
+    border: 1px solid var(--border);
+    padding: 28px;
+    min-height: 150px;
+    background: rgba(10,10,10,0.85);
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-    .menu a {
-        white-space: nowrap;
-    }
+.action-card:hover {
+    border-color: white;
+    transform: translateY(-4px);
+}
 
-    .main {
-        margin-left: 0;
-        padding: 30px 20px;
-    }
+.action-number {
+    color: #555;
+    font-size: 10px;
+}
 
-    .cards {
+.action-title {
+    margin-top: 45px;
+    font-size: 18px;
+}
+
+.action-text {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 8px;
+}
+
+/* LOADING */
+
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    background: #050505;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    font-size: 12px;
+    letter-spacing: 3px;
+}
+
+/* MOBILE */
+
+@media(max-width: 1000px) {
+
+    .stats {
         grid-template-columns: repeat(2, 1fr);
     }
+
 }
 
-@media (max-width: 500px) {
-    .cards {
+@media(max-width: 750px) {
+
+    nav {
+        padding: 0 20px;
+    }
+
+    .dashboard {
+        padding: 50px 20px;
+    }
+
+    .main-grid {
         grid-template-columns: 1fr;
     }
+
+    .actions {
+        grid-template-columns: 1fr;
+    }
+
+    .user-info {
+        display: none;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .research-left {
+        gap: 12px;
+    }
+
+    .research-title {
+        font-size: 14px;
+    }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<aside class="sidebar">
+<div id="loading-screen">LOADING BRONE...</div>
 
-    <div class="logo">BRONE</div>
+<div class="background-grid"></div>
+<div class="glow"></div>
 
-    <nav class="menu">
-        <a href="dashboard.html" class="active">Dashboard</a>
-        <a href="#">Markets</a>
-        <a href="#">Research</a>
-        <a href="#">Watchlist</a>
-        <a href="#">Profile</a>
-        <a href="index.html">Back to Website</a>
-    </nav>
+<nav>
 
-</aside>
+    <a href="index.html" class="logo">BRONE</a>
 
-<main class="main">
+    <div class="user-area">
 
-    <div class="topbar">
-        <div>
-            <div class="label">BRONE TERMINAL</div>
-            <h1>Market Overview</h1>
+        <div class="user-info">
+            <div class="user-name" id="user-name">Loading...</div>
+            <div class="user-email" id="user-email"></div>
         </div>
 
-        <div class="profile">
-            Guest User
-        </div>
+        <button class="logout" id="logout-button">
+            LOGOUT
+        </button>
+
     </div>
 
-    <div class="label">MARKETS</div>
+</nav>
 
-    <section class="cards">
+<main class="dashboard">
 
-        <div class="card">
-            <h3>XAU/USD</h3>
-            <div class="price">Loading...</div>
-            <div class="change">Gold Market</div>
+    <div class="eyebrow">
+        BRONE / MEMBER DASHBOARD
+    </div>
+
+    <h1 id="welcome">
+        Welcome.
+    </h1>
+
+    <p class="subtitle">
+        Your personal workspace for market research, analysis and future BRONE platform features.
+    </p>
+
+    <div class="status-bar">
+
+        <div class="status-dot"></div>
+
+        <div class="status-text">
+            ACCOUNT ACTIVE • BRONE PLATFORM CONNECTED
         </div>
 
-        <div class="card">
-            <h3>S&P 500</h3>
-            <div class="price">Loading...</div>
-            <div class="change">US Equities</div>
+    </div>
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-label">ACCOUNT STATUS</div>
+
+            <div class="stat-value">ACTIVE</div>
+
+            <div class="stat-info">Supabase authenticated</div>
+
         </div>
 
-        <div class="card">
-            <h3>USD/INR</h3>
-            <div class="price">Loading...</div>
-            <div class="change">Foreign Exchange</div>
+        <div class="stat-card">
+
+            <div class="stat-label">MARKETS TRACKED</div>
+
+            <div class="stat-value">04</div>
+
+            <div class="stat-info">Watchlist available</div>
+
         </div>
 
-        <div class="card">
-            <h3>BTC/USD</h3>
-            <div class="price">Loading...</div>
-            <div class="change">Digital Assets</div>
+        <div class="stat-card">
+
+            <div class="stat-label">RESEARCH</div>
+
+            <div class="stat-value">03</div>
+
+            <div class="stat-info">Reports in development</div>
+
         </div>
 
-    </section>
+        <div class="stat-card">
 
-    <section class="research">
+            <div class="stat-label">MEMBER SINCE</div>
 
-        <div class="label">LATEST RESEARCH</div>
+            <div class="stat-value" id="member-year">—</div>
 
-        <h2>Research & Insights</h2>
+            <div class="stat-info">BRONE member</div>
 
-        <div class="research-item">
-            <div>
-                <h3>Global Macro Outlook</h3>
-                <p>Analysis of economic trends and global markets.</p>
+        </div>
+
+    </div>
+
+    <div class="main-grid">
+
+        <div class="panel">
+
+            <div class="panel-title">
+                MARKET OVERVIEW
             </div>
 
-            <a href="#" class="read">COMING SOON →</a>
-        </div>
-
-        <div class="research-item">
-            <div>
-                <h3>Gold Market Analysis</h3>
-                <p>Research and observations from the commodities market.</p>
+            <div class="panel-subtitle">
+                Market Intelligence
             </div>
 
-            <a href="#" class="read">COMING SOON →</a>
-        </div>
+            <div class="chart-area">
 
-        <div class="research-item">
-            <div>
-                <h3>Market Strategy</h3>
-                <p>Perspectives on market conditions and risk.</p>
+                <div class="chart-grid"></div>
+
+                <svg viewBox="0 0 1000 300" preserveAspectRatio="none">
+
+                    <polyline
+                        class="chart-line"
+                        points="
+                        0,250
+                        70,225
+                        140,235
+                        210,185
+                        280,205
+                        350,140
+                        420,175
+                        490,110
+                        560,145
+                        630,85
+                        700,120
+                        770,65
+                        840,95
+                        910,35
+                        1000,55
+                        ">
+                    </polyline>
+
+                </svg>
+
             </div>
 
-            <a href="#" class="read">COMING SOON →</a>
         </div>
 
-    </section>
+        <div class="panel">
+
+            <div class="panel-title">
+                WATCHLIST
+            </div>
+
+            <div class="watchlist">
+
+                <div class="watch-item">
+
+                    <div>
+                        <div class="asset-name">Gold</div>
+                        <div class="asset-symbol">XAUUSD</div>
+                    </div>
+
+                    <div class="asset-right">
+                        <div class="asset-price">MARKET</div>
+                        <div class="asset-status">LIVE DATA SOON</div>
+                    </div>
+
+                </div>
+
+                <div class="watch-item">
+
+                    <div>
+                        <div class="asset-name">S&P 500</div>
+                        <div class="asset-symbol">SPX</div>
+                    </div>
+
+                    <div class="asset-right">
+                        <div class="asset-price">MARKET</div>
+                        <div class="asset-status">LIVE DATA SOON</div>
+                    </div>
+
+                </div>
+
+                <div class="watch-item">
+
+                    <div>
+                        <div class="asset-name">Bitcoin</div>
+                        <div class="asset-symbol">BTCUSD</div>
+                    </div>
+
+                    <div class="asset-right">
+                        <div class="asset-price">MARKET</div>
+                        <div class="asset-status">LIVE DATA SOON</div>
+                    </div>
+
+                </div>
+
+                <div class="watch-item">
+
+                    <div>
+                        <div class="asset-name">Indian Markets</div>
+                        <div class="asset-symbol">NIFTY</div>
+                    </div>
+
+                    <div class="asset-right">
+                        <div class="asset-price">MARKET</div>
+                        <div class="asset-status">LIVE DATA SOON</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="panel research-section">
+
+        <div class="panel-title">
+            LATEST RESEARCH
+        </div>
+
+        <div class="research-list">
+
+            <div class="research-item">
+
+                <div class="research-left">
+
+                    <div class="research-number">01</div>
+
+                    <div>
+                        <div class="research-tag">MACRO</div>
+                        <div class="research-title">
+                            Global Economic Outlook
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="coming-soon">
+                    COMING SOON →
+                </div>
+
+            </div>
+
+            <div class="research-item">
+
+                <div class="research-left">
+
+                    <div class="research-number">02</div>
+
+                    <div>
+                        <div class="research-tag">COMMODITIES</div>
+                        <div class="research-title">
+                            Gold & Commodity Market Analysis
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="coming-soon">
+                    COMING SOON →
+                </div>
+
+            </div>
+
+            <div class="research-item">
+
+                <div class="research-left">
+
+                    <div class="research-number">03</div>
+
+                    <div>
+                        <div class="research-tag">STRATEGY</div>
+                        <div class="research-title">
+                            Risk Management Framework
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="coming-soon">
+                    COMING SOON →
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="actions">
+
+        <div class="action-card">
+
+            <div class="action-number">01</div>
+
+            <div class="action-title">
+                Markets
+            </div>
+
+            <div class="action-text">
+                Explore market insights.
+            </div>
+
+        </div>
+
+        <div class="action-card">
+
+            <div class="action-number">02</div>
+
+            <div class="action-title">
+                Research
+            </div>
+
+            <div class="action-text">
+                View BRONE research reports.
+            </div>
+
+        </div>
+
+        <div class="action-card">
+
+            <div class="action-number">03</div>
+
+            <div class="action-title">
+                Portfolio
+            </div>
+
+            <div class="action-text">
+                Future portfolio features.
+            </div>
+
+        </div>
+
+    </div>
 
 </main>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+    "https://dvcidwppcmgmivolbeev.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_y-ywXyEcwepxCc5h_uiAFw_sFnJb7L_";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+async function checkUser() {
+
+    try {
+
+        const {
+            data: { user },
+            error
+        } = await supabaseClient.auth.getUser();
+
+
+        if (error || !user) {
+
+            window.location.replace("login.html");
+
+            return;
+
+        }
+
+
+        const fullName =
+            user.user_metadata?.full_name;
+
+        const displayName =
+            fullName || user.email.split("@")[0];
+
+
+        document.getElementById("welcome").textContent =
+            "Welcome, " + displayName + ".";
+
+
+        document.getElementById("user-name").textContent =
+            displayName;
+
+
+        document.getElementById("user-email").textContent =
+            user.email;
+
+
+        const createdDate =
+            new Date(user.created_at);
+
+        document.getElementById("member-year").textContent =
+            createdDate.getFullYear();
+
+
+        document.getElementById("loading-screen")
+            .style.display = "none";
+
+
+    } catch (error) {
+
+        window.location.replace("login.html");
+
+    }
+
+}
+
+
+checkUser();
+
+
+document
+.getElementById("logout-button")
+.addEventListener("click", async function() {
+
+    await supabaseClient.auth.signOut();
+
+    window.location.replace("index.html");
+
+});
+
+</script>
 
 </body>
 </html>
