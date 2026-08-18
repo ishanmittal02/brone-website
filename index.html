@@ -6,639 +6,691 @@
 
 <title>BRONE — Trading & Investment</title>
 
-<meta name="description" content="BRONE is a trading and investment firm focused on disciplined decision-making, research and risk management.">
+<meta name="description" content="BRONE is a research-driven trading and investment platform focused on disciplined decision-making and risk management.">
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* =========================
+   RESET & GLOBAL
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+html {
+    scroll-behavior: smooth;
 }
 
-body{
-    background:#050505;
-    color:#f4f4f4;
-    font-family:Arial, Helvetica, sans-serif;
-    line-height:1.6;
+body {
+    background: #050505;
+    color: #f5f5f5;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
 }
 
-/* ================= NAVBAR ================= */
-
-nav{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    z-index:1000;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:24px 6%;
-
-    background:rgba(5,5,5,.75);
-    backdrop-filter:blur(18px);
-
-    border-bottom:1px solid rgba(255,255,255,.08);
+a {
+    text-decoration: none;
 }
 
-.logo{
-    font-size:25px;
-    font-weight:800;
-    letter-spacing:7px;
+/* =========================
+   NAVIGATION
+========================= */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px 6%;
+
+    background: rgba(5, 5, 5, 0.82);
+    backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid #181818;
+
+    z-index: 1000;
 }
 
-.nav-links{
-    display:flex;
-    gap:35px;
+.logo {
+    color: white;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 7px;
 }
 
-.nav-links a{
-    color:#999;
-    text-decoration:none;
-    font-size:13px;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-    transition:.3s;
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
 }
 
-.nav-links a:hover{
-    color:#fff;
+.nav-links a {
+    color: #888;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
 }
 
-/* ================= HERO ================= */
-
-.hero{
-    min-height:100vh;
-
-    display:flex;
-    align-items:center;
-
-    padding:150px 6% 100px;
-
-    position:relative;
-    overflow:hidden;
+.nav-links a:hover {
+    color: white;
 }
 
-.hero::before{
-    content:"";
+.nav-login {
+    color: white !important;
+}
 
-    position:absolute;
+.nav-signup {
+    border: 1px solid white;
+    padding: 10px 16px;
+    color: white !important;
+}
 
-    width:650px;
-    height:650px;
+.nav-signup:hover {
+    background: white;
+    color: black !important;
+}
 
-    right:-180px;
-    top:100px;
+/* =========================
+   HERO
+========================= */
 
-    background:radial-gradient(
+.hero {
+    min-height: 100vh;
+    padding: 160px 6% 100px;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background grid */
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+
+    background-size: 60px 60px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent
+    );
+}
+
+/* Glow */
+
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 700px;
+    height: 700px;
+
+    right: -200px;
+    top: 50px;
+
+    background: radial-gradient(
         circle,
-        rgba(255,255,255,.08),
+        rgba(255,255,255,0.07),
         transparent 65%
     );
 
-    filter:blur(30px);
+    filter: blur(30px);
 }
 
-.hero-content{
-    max-width:1100px;
-    position:relative;
-    z-index:2;
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
 }
 
-.eyebrow{
-    color:#888;
-    font-size:12px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-
-    margin-bottom:28px;
+.eyebrow {
+    color: #777;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
 }
 
-.hero h1{
-    font-size:clamp(60px,9vw,135px);
-    line-height:.88;
-    letter-spacing:-7px;
-    font-weight:800;
+.hero h1 {
+    font-size: clamp(60px, 10vw, 145px);
+    line-height: 0.85;
+    letter-spacing: -7px;
+    font-weight: 800;
 }
 
-.hero h1 span{
-    color:#777;
+.hero h1 span {
+    color: #555;
 }
 
-.hero-text{
-    max-width:600px;
-    margin-top:45px;
+.hero-text {
+    max-width: 600px;
+    margin-top: 40px;
 
-    color:#999;
-
-    font-size:18px;
-    line-height:1.8;
+    color: #999;
+    font-size: 18px;
+    line-height: 1.8;
 }
 
-.hero-buttons{
-    display:flex;
-    gap:15px;
-    margin-top:40px;
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 40px;
 }
 
-.btn{
-    display:inline-block;
+.btn {
+    display: inline-block;
 
-    padding:16px 28px;
+    padding: 16px 26px;
 
-    text-decoration:none;
+    font-size: 12px;
+    font-weight: bold;
 
-    font-size:13px;
-    font-weight:bold;
+    letter-spacing: 1px;
 
-    letter-spacing:1px;
-
-    transition:.3s;
+    transition: 0.3s;
 }
 
-.btn-primary{
-    background:#fff;
-    color:#000;
+.btn-primary {
+    background: white;
+    color: black;
 }
 
-.btn-primary:hover{
-    transform:translateY(-3px);
+.btn-primary:hover {
+    transform: translateY(-3px);
 }
 
-.btn-secondary{
-    border:1px solid #333;
-    color:#fff;
+.btn-secondary {
+    border: 1px solid #333;
+    color: white;
 }
 
-.btn-secondary:hover{
-    border-color:#777;
+.btn-secondary:hover {
+    border-color: white;
 }
 
-/* ================= TICKER ================= */
+/* =========================
+   TICKER
+========================= */
 
-.ticker{
-    border-top:1px solid #1c1c1c;
-    border-bottom:1px solid #1c1c1c;
+.ticker {
+    overflow: hidden;
+    white-space: nowrap;
 
-    overflow:hidden;
+    border-top: 1px solid #1c1c1c;
+    border-bottom: 1px solid #1c1c1c;
 
-    white-space:nowrap;
+    padding: 18px 0;
 
-    padding:17px 0;
-
-    color:#777;
-
-    font-size:11px;
-    letter-spacing:3px;
+    color: #666;
+    font-size: 11px;
+    letter-spacing: 3px;
 }
 
-.ticker-track{
-    display:inline-block;
-    animation:ticker 25s linear infinite;
+.ticker-track {
+    display: inline-block;
+    animation: tickerMove 25s linear infinite;
 }
 
-.ticker span{
-    margin-right:70px;
+.ticker span {
+    margin-right: 70px;
 }
 
-@keyframes ticker{
+@keyframes tickerMove {
 
-    from{
-        transform:translateX(0);
+    from {
+        transform: translateX(0);
     }
 
-    to{
-        transform:translateX(-50%);
+    to {
+        transform: translateX(-50%);
     }
 
 }
 
-/* ================= GENERAL ================= */
+/* =========================
+   GENERAL SECTIONS
+========================= */
 
-section{
-    padding:130px 6%;
-
-    border-bottom:1px solid #181818;
+section:not(.hero) {
+    padding: 120px 6%;
+    border-bottom: 1px solid #181818;
 }
 
-.section-label{
-    color:#666;
+.section-label {
+    color: #666;
 
-    text-transform:uppercase;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
 
-    font-size:11px;
-
-    letter-spacing:4px;
-
-    margin-bottom:25px;
+    margin-bottom: 25px;
 }
 
-.section-title{
-    font-size:clamp(40px,6vw,75px);
+.section-title {
+    max-width: 950px;
 
-    line-height:1;
+    font-size: clamp(42px, 6vw, 80px);
 
-    letter-spacing:-3px;
+    line-height: 1;
 
-    max-width:900px;
+    letter-spacing: -4px;
 }
 
-.section-description{
-    max-width:700px;
+.section-description {
+    max-width: 700px;
 
-    margin-top:30px;
+    margin-top: 30px;
 
-    color:#888;
-
-    font-size:17px;
-
-    line-height:1.9;
+    color: #888;
+    font-size: 17px;
+    line-height: 1.8;
 }
 
-/* ================= ABOUT ================= */
+/* =========================
+   ABOUT
+========================= */
 
-.about-grid{
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
 
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:100px;
-
-    margin-top:70px;
+    margin-top: 70px;
 }
 
-.about-number{
-
-    font-size:80px;
-
-    font-weight:800;
-
-    color:#202020;
-
-    line-height:1;
+.about-card {
+    border-top: 1px solid #222;
+    padding-top: 30px;
 }
 
-.about-card h3{
+.about-number {
+    color: #333;
 
-    font-size:25px;
+    font-size: 70px;
+    font-weight: bold;
 
-    margin-bottom:15px;
-
+    margin-bottom: 25px;
 }
 
-.about-card p{
-
-    color:#888;
-
-    line-height:1.8;
-
+.about-card h3 {
+    font-size: 25px;
+    margin-bottom: 15px;
 }
 
-/* ================= PHILOSOPHY ================= */
-
-.philosophy{
-
-    background:#080808;
-
+.about-card p {
+    color: #777;
+    line-height: 1.8;
 }
 
-.philosophy-grid{
+/* =========================
+   PHILOSOPHY
+========================= */
 
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:1px;
-
-    background:#222;
-
-    margin-top:70px;
-
-    border:1px solid #222;
-
+.philosophy {
+    background: #080808;
 }
 
-.philosophy-card{
+.philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 
-    background:#080808;
+    margin-top: 70px;
 
-    padding:45px;
-
-    min-height:270px;
-
-    transition:.4s;
-
+    border: 1px solid #222;
 }
 
-.philosophy-card:hover{
+.philosophy-card {
+    padding: 45px;
 
-    background:#0d0d0d;
+    min-height: 280px;
 
+    border-right: 1px solid #222;
+
+    transition: 0.3s;
 }
 
-.card-number{
-
-    color:#555;
-
-    font-size:12px;
-
-    letter-spacing:2px;
-
+.philosophy-card:last-child {
+    border-right: none;
 }
 
-.philosophy-card h3{
-
-    margin-top:65px;
-
-    font-size:23px;
-
+.philosophy-card:hover {
+    background: #0e0e0e;
 }
 
-.philosophy-card p{
-
-    color:#777;
-
-    margin-top:15px;
-
-    font-size:14px;
-
-    line-height:1.8;
-
+.card-number {
+    color: #555;
+    font-size: 12px;
 }
 
-/* ================= MARKETS ================= */
-
-.markets{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:15px;
-
-    margin-top:70px;
-
+.philosophy-card h3 {
+    margin-top: 65px;
+    font-size: 25px;
 }
 
-.market{
-
-    border:1px solid #222;
-
-    padding:35px 25px;
-
-    min-height:180px;
-
-    transition:.3s;
-
+.philosophy-card p {
+    margin-top: 15px;
+    color: #777;
+    font-size: 14px;
 }
 
-.market:hover{
+/* =========================
+   MARKETS
+========================= */
 
-    transform:translateY(-5px);
+.markets-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 
-    border-color:#555;
+    gap: 15px;
 
+    margin-top: 70px;
 }
 
-.market-icon{
+.market-card {
+    border: 1px solid #222;
 
-    font-size:12px;
+    padding: 30px;
 
-    color:#555;
+    min-height: 220px;
 
-    letter-spacing:2px;
-
+    transition: 0.3s;
 }
 
-.market h3{
-
-    margin-top:50px;
-
-    font-size:20px;
-
+.market-card:hover {
+    transform: translateY(-5px);
+    border-color: #666;
 }
 
-.market p{
-
-    color:#666;
-
-    margin-top:8px;
-
-    font-size:13px;
-
+.market-number {
+    color: #555;
+    font-size: 12px;
 }
 
-/* ================= RESEARCH ================= */
-
-.research{
-
-    background:#070707;
-
+.market-card h3 {
+    margin-top: 70px;
+    font-size: 22px;
 }
 
-.research-list{
-
-    margin-top:70px;
-
-    border-top:1px solid #222;
-
+.market-card p {
+    margin-top: 8px;
+    color: #666;
+    font-size: 13px;
 }
 
-.research-item{
+/* =========================
+   DASHBOARD PROMO
+========================= */
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:30px 0;
-
-    border-bottom:1px solid #222;
-
+.platform {
+    background: #080808;
 }
 
-.research-item span{
+.platform-box {
+    margin-top: 70px;
 
-    color:#555;
+    border: 1px solid #222;
 
-    font-size:12px;
+    padding: 50px;
 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 40px;
 }
 
-.research-item h3{
-
-    font-size:20px;
-
+.platform-box h3 {
+    font-size: 35px;
 }
 
-.research-item a{
-
-    color:#777;
-
-    text-decoration:none;
-
+.platform-box p {
+    color: #777;
+    max-width: 600px;
+    margin-top: 15px;
 }
 
-.research-item a:hover{
+/* =========================
+   RESEARCH
+========================= */
 
-    color:white;
+.research-list {
+    margin-top: 70px;
 
+    border-top: 1px solid #222;
 }
 
-/* ================= CONTACT ================= */
+.research-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-.contact{
+    padding: 30px 0;
 
-    min-height:70vh;
+    border-bottom: 1px solid #222;
 
-    display:flex;
-
-    align-items:center;
-
+    transition: 0.3s;
 }
 
-.contact h2{
-
-    font-size:clamp(50px,8vw,110px);
-
-    line-height:.9;
-
-    letter-spacing:-6px;
-
+.research-item:hover {
+    padding-left: 15px;
 }
 
-.contact-email{
-
-    display:inline-block;
-
-    margin-top:45px;
-
-    color:#fff;
-
-    font-size:20px;
-
-    text-decoration:none;
-
-    border-bottom:1px solid #555;
-
-    padding-bottom:8px;
-
+.research-category {
+    color: #555;
+    font-size: 11px;
+    letter-spacing: 2px;
 }
 
-/* ================= FOOTER ================= */
-
-footer{
-
-    padding:60px 6%;
-
-    color:#555;
-
-    font-size:12px;
-
+.research-item h3 {
+    font-size: 20px;
 }
 
-.footer-top{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    padding-bottom:40px;
-
-    border-bottom:1px solid #1c1c1c;
-
+.research-status {
+    color: #777;
+    font-size: 11px;
+    letter-spacing: 1px;
 }
 
-.footer-logo{
+/* =========================
+   CONTACT
+========================= */
 
-    color:#fff;
+.contact {
+    min-height: 70vh;
 
-    font-size:20px;
-
-    font-weight:bold;
-
-    letter-spacing:5px;
-
+    display: flex;
+    align-items: center;
 }
 
-.disclaimer{
+.contact h2 {
+    font-size: clamp(60px, 9vw, 130px);
 
-    max-width:750px;
+    line-height: 0.85;
 
-    margin-top:35px;
-
-    line-height:1.8;
-
-    color:#444;
-
+    letter-spacing: -7px;
 }
 
-/* ================= MOBILE ================= */
+.contact-email {
+    display: inline-block;
 
-@media(max-width:900px){
+    margin-top: 45px;
 
-    .nav-links{
-        display:none;
+    color: white;
+
+    font-size: 20px;
+
+    border-bottom: 1px solid #555;
+
+    padding-bottom: 8px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    padding: 60px 6%;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+
+    padding-bottom: 35px;
+
+    border-bottom: 1px solid #222;
+}
+
+.footer-logo {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 6px;
+}
+
+.footer-text {
+    color: #666;
+    font-size: 13px;
+}
+
+.disclaimer {
+    max-width: 850px;
+
+    margin-top: 35px;
+
+    color: #555;
+
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.copyright {
+    margin-top: 30px;
+
+    color: #444;
+
+    font-size: 12px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .nav-links {
+        gap: 14px;
     }
 
-    .hero{
-        padding-top:140px;
+    .nav-links a {
+        font-size: 10px;
     }
 
-    .hero h1{
-        letter-spacing:-4px;
-    }
-
-    .about-grid{
-        grid-template-columns:1fr;
-        gap:50px;
-    }
-
-    .philosophy-grid{
-        grid-template-columns:1fr;
-    }
-
-    .markets{
-        grid-template-columns:1fr 1fr;
+    .markets-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
 }
 
-@media(max-width:600px){
+@media (max-width: 800px) {
 
-    section{
-        padding:90px 6%;
+    nav {
+        padding: 18px 6%;
     }
 
-    .hero{
-        min-height:90vh;
+    .nav-links a:not(.nav-login):not(.nav-signup) {
+        display: none;
     }
 
-    .hero-buttons{
-        flex-direction:column;
-        align-items:flex-start;
+    .hero h1 {
+        letter-spacing: -4px;
     }
 
-    .markets{
-        grid-template-columns:1fr;
+    .about-grid {
+        grid-template-columns: 1fr;
     }
 
-    .research-item h3{
-        font-size:16px;
+    .philosophy-grid {
+        grid-template-columns: 1fr;
     }
 
-    .footer-top{
-        flex-direction:column;
-        gap:20px;
+    .philosophy-card {
+        border-right: none;
+        border-bottom: 1px solid #222;
+    }
+
+    .platform-box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}
+
+@media (max-width: 550px) {
+
+    .logo {
+        font-size: 19px;
+        letter-spacing: 5px;
+    }
+
+    .nav-links {
+        gap: 8px;
+    }
+
+    .nav-signup {
+        padding: 8px 10px;
+    }
+
+    .hero {
+        padding-top: 140px;
+    }
+
+    .hero h1 {
+        font-size: 60px;
+        letter-spacing: -3px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .markets-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .research-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .footer-top {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    section:not(.hero) {
+        padding: 90px 6%;
     }
 
 }
@@ -646,17 +698,16 @@ footer{
 </style>
 </head>
 
-
 <body>
 
 
-<!-- NAVIGATION -->
+<!-- ================= NAVBAR ================= -->
 
 <nav>
 
-    <div class="logo">
+    <a href="index.html" class="logo">
         BRONE
-    </div>
+    </a>
 
     <div class="nav-links">
 
@@ -670,19 +721,27 @@ footer{
 
         <a href="#contact">Contact</a>
 
+        <a href="login.html" class="nav-login">
+            Login
+        </a>
+
+        <a href="signup.html" class="nav-signup">
+            Create Account
+        </a>
+
     </div>
 
 </nav>
 
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 
 <section class="hero">
 
     <div class="hero-content">
 
         <div class="eyebrow">
-            Trading & Investment
+            Trading • Research • Investment
         </div>
 
         <h1>
@@ -693,20 +752,20 @@ footer{
 
         <p class="hero-text">
 
-            BRONE approaches markets through disciplined
-            decision-making, independent research and
-            rigorous risk management.
+            BRONE is building a research-driven platform focused on
+            markets, disciplined decision-making and responsible
+            capital allocation.
 
         </p>
 
         <div class="hero-buttons">
 
-            <a href="#philosophy" class="btn btn-primary">
-                OUR APPROACH
+            <a href="signup.html" class="btn btn-primary">
+                CREATE ACCOUNT
             </a>
 
-            <a href="#contact" class="btn btn-secondary">
-                CONTACT BRONE
+            <a href="#philosophy" class="btn btn-secondary">
+                OUR APPROACH
             </a>
 
         </div>
@@ -716,7 +775,7 @@ footer{
 </section>
 
 
-<!-- MARKET TICKER -->
+<!-- ================= TICKER ================= -->
 
 <div class="ticker">
 
@@ -726,12 +785,14 @@ footer{
         <span>MACRO RESEARCH</span>
         <span>RISK MANAGEMENT</span>
         <span>CAPITAL ALLOCATION</span>
+        <span>MARKET INTELLIGENCE</span>
         <span>DISCIPLINED TRADING</span>
 
         <span>GLOBAL MARKETS</span>
         <span>MACRO RESEARCH</span>
         <span>RISK MANAGEMENT</span>
         <span>CAPITAL ALLOCATION</span>
+        <span>MARKET INTELLIGENCE</span>
         <span>DISCIPLINED TRADING</span>
 
     </div>
@@ -739,12 +800,12 @@ footer{
 </div>
 
 
-<!-- ABOUT -->
+<!-- ================= ABOUT ================= -->
 
 <section id="about">
 
     <div class="section-label">
-        01 — About
+        01 — About BRONE
     </div>
 
     <h2 class="section-title">
@@ -753,24 +814,19 @@ footer{
 
     <p class="section-description">
 
-        BRONE is being built as a trading and investment
-        platform focused on research, disciplined execution
-        and responsible capital allocation.
+        BRONE is developing a platform for market research,
+        analysis and informed decision-making across different
+        market environments.
 
     </p>
 
-
     <div class="about-grid">
 
-        <div>
+        <div class="about-card">
 
             <div class="about-number">
                 01
             </div>
-
-        </div>
-
-        <div class="about-card">
 
             <h3>
                 Independent Thinking
@@ -778,25 +834,20 @@ footer{
 
             <p>
 
-                Markets are constantly influenced by
-                narratives, emotions and short-term noise.
-                BRONE focuses on developing independent
-                views through research and analysis.
+                Markets are influenced by narratives, emotion
+                and short-term noise. Our approach focuses on
+                research and independent analysis.
 
             </p>
 
         </div>
 
 
-        <div>
+        <div class="about-card">
 
             <div class="about-number">
                 02
             </div>
-
-        </div>
-
-        <div class="about-card">
 
             <h3>
                 Risk First
@@ -804,9 +855,9 @@ footer{
 
             <p>
 
-                Every opportunity carries risk.
-                Understanding and controlling that risk
-                is fundamental to our approach.
+                Every opportunity carries uncertainty.
+                Understanding and managing risk is fundamental
+                to responsible decision-making.
 
             </p>
 
@@ -817,7 +868,7 @@ footer{
 </section>
 
 
-<!-- PHILOSOPHY -->
+<!-- ================= PHILOSOPHY ================= -->
 
 <section id="philosophy" class="philosophy">
 
@@ -826,9 +877,8 @@ footer{
     </div>
 
     <h2 class="section-title">
-        Three principles guide every decision.
+        Three principles guide our approach.
     </h2>
-
 
     <div class="philosophy-grid">
 
@@ -844,8 +894,9 @@ footer{
 
             <p>
 
-                Understand the environment before
-                making a decision.
+                Understand the market environment,
+                information and broader context before
+                making decisions.
 
             </p>
 
@@ -864,8 +915,9 @@ footer{
 
             <p>
 
-                Capital preservation is fundamental
-                to sustainable growth.
+                Capital preservation and risk awareness
+                are essential for sustainable long-term
+                participation in markets.
 
             </p>
 
@@ -884,8 +936,9 @@ footer{
 
             <p>
 
-                Act decisively when research and
-                opportunity align.
+                When research, opportunity and risk
+                management align, decisions should be
+                made with clarity.
 
             </p>
 
@@ -896,7 +949,7 @@ footer{
 </section>
 
 
-<!-- MARKETS -->
+<!-- ================= MARKETS ================= -->
 
 <section id="markets">
 
@@ -910,17 +963,16 @@ footer{
 
     <p class="section-description">
 
-        Our research framework can be applied across
-        multiple asset classes and market environments.
+        BRONE's research framework explores multiple
+        asset classes and changing market environments.
 
     </p>
 
+    <div class="markets-grid">
 
-    <div class="markets">
+        <div class="market-card">
 
-        <div class="market">
-
-            <div class="market-icon">
+            <div class="market-number">
                 01
             </div>
 
@@ -929,15 +981,15 @@ footer{
             </h3>
 
             <p>
-                Companies & equity markets
+                Companies and equity markets.
             </p>
 
         </div>
 
 
-        <div class="market">
+        <div class="market-card">
 
-            <div class="market-icon">
+            <div class="market-number">
                 02
             </div>
 
@@ -946,15 +998,15 @@ footer{
             </h3>
 
             <p>
-                Gold, energy & commodities
+                Gold, energy and global commodities.
             </p>
 
         </div>
 
 
-        <div class="market">
+        <div class="market-card">
 
-            <div class="market-icon">
+            <div class="market-number">
                 03
             </div>
 
@@ -963,15 +1015,15 @@ footer{
             </h3>
 
             <p>
-                Rates, currencies & economic cycles
+                Rates, currencies and economic cycles.
             </p>
 
         </div>
 
 
-        <div class="market">
+        <div class="market-card">
 
-            <div class="market-icon">
+            <div class="market-number">
                 04
             </div>
 
@@ -980,7 +1032,7 @@ footer{
             </h3>
 
             <p>
-                Emerging market opportunities
+                Emerging technologies and digital markets.
             </p>
 
         </div>
@@ -990,12 +1042,50 @@ footer{
 </section>
 
 
-<!-- RESEARCH -->
+<!-- ================= MEMBER PLATFORM ================= -->
 
-<section id="research" class="research">
+<section class="platform">
 
     <div class="section-label">
-        04 — Research
+        04 — BRONE Platform
+    </div>
+
+    <h2 class="section-title">
+        Your personal market workspace.
+    </h2>
+
+    <div class="platform-box">
+
+        <div>
+
+            <h3>
+                BRONE Dashboard
+            </h3>
+
+            <p>
+
+                Create an account to access the BRONE dashboard,
+                market overview and future research features.
+
+            </p>
+
+        </div>
+
+        <a href="signup.html" class="btn btn-primary">
+            GET STARTED
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= RESEARCH ================= -->
+
+<section id="research">
+
+    <div class="section-label">
+        05 — Research
     </div>
 
     <h2 class="section-title">
@@ -1004,62 +1094,61 @@ footer{
 
     <p class="section-description">
 
-        BRONE's research platform will provide market
-        observations, macroeconomic analysis and
-        investment perspectives.
+        The BRONE research platform will feature market
+        observations, macroeconomic perspectives and
+        analysis across global markets.
 
     </p>
-
 
     <div class="research-list">
 
         <div class="research-item">
 
-            <span>
+            <div class="research-category">
                 MACRO
-            </span>
+            </div>
 
             <h3>
                 Global Economic Outlook
             </h3>
 
-            <span>
-                SOON
-            </span>
+            <div class="research-status">
+                COMING SOON →
+            </div>
 
         </div>
 
 
         <div class="research-item">
 
-            <span>
-                MARKETS
-            </span>
+            <div class="research-category">
+                COMMODITIES
+            </div>
 
             <h3>
-                Commodity Market Research
+                Gold & Commodity Market Analysis
             </h3>
 
-            <span>
-                SOON
-            </span>
+            <div class="research-status">
+                COMING SOON →
+            </div>
 
         </div>
 
 
         <div class="research-item">
 
-            <span>
+            <div class="research-category">
                 STRATEGY
-            </span>
+            </div>
 
             <h3>
-                Market Strategy & Insights
+                Market Strategy & Risk Perspectives
             </h3>
 
-            <span>
-                SOON
-            </span>
+            <div class="research-status">
+                COMING SOON →
+            </div>
 
         </div>
 
@@ -1068,20 +1157,20 @@ footer{
 </section>
 
 
-<!-- CONTACT -->
+<!-- ================= CONTACT ================= -->
 
 <section id="contact" class="contact">
 
     <div>
 
         <div class="section-label">
-            05 — Contact
+            06 — Contact
         </div>
 
         <h2>
-            Let's build<br>
-            something<br>
-            enduring.
+            BUILD.<br>
+            LEARN.<br>
+            EVOLVE.
         </h2>
 
         <a
@@ -1096,7 +1185,7 @@ footer{
 </section>
 
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
@@ -1106,34 +1195,30 @@ footer{
             BRONE
         </div>
 
-        <div>
-            Trading & Investment
+        <div class="footer-text">
+            Trading • Research • Investment
         </div>
 
     </div>
 
-
     <p class="disclaimer">
 
-        Disclaimer: Information presented on this website
-        is for general informational purposes only and does
-        not constitute investment advice, a recommendation,
-        an offer, or a solicitation to buy or sell any
-        financial instrument. Investment involves risk,
-        including possible loss of capital. Any investment
-        or advisory services offered by BRONE will be subject
-        to applicable laws, regulations and required
-        registrations.
+        Disclaimer: The information provided on this website is for
+        general informational and educational purposes only. Nothing
+        on this website should be considered investment advice,
+        financial advice, a recommendation, or an offer or solicitation
+        to buy or sell any financial instrument. Financial markets
+        involve risk, including the possible loss of capital. Any future
+        services offered by BRONE will be subject to applicable laws,
+        regulations, registrations and approvals.
 
     </p>
 
-
-    <p style="margin-top:30px;">
+    <p class="copyright">
         © 2026 BRONE. All rights reserved.
     </p>
 
 </footer>
-
 
 </body>
 </html>
