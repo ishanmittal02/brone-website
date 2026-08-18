@@ -34,7 +34,7 @@ body {
     font-size: 30px;
     font-weight: bold;
     letter-spacing: 8px;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
 }
 
 .login-box {
@@ -52,14 +52,15 @@ h1 {
     color: #777;
     margin-bottom: 35px;
     font-size: 14px;
+    line-height: 1.6;
 }
 
 label {
     display: block;
-    font-size: 12px;
-    letter-spacing: 1px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
     color: #aaa;
-    margin-bottom: 10px;
+    margin-bottom: 9px;
 }
 
 input {
@@ -68,7 +69,7 @@ input {
     border: 1px solid #292929;
     color: white;
     padding: 15px;
-    margin-bottom: 22px;
+    margin-bottom: 20px;
     font-size: 15px;
     outline: none;
 }
@@ -93,6 +94,13 @@ button:disabled {
     cursor: not-allowed;
 }
 
+.message {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 13px;
+    min-height: 25px;
+}
+
 .bottom-text {
     text-align: center;
     margin-top: 28px;
@@ -100,7 +108,8 @@ button:disabled {
     font-size: 14px;
 }
 
-a {
+.bottom-text a,
+.back {
     color: white;
     text-decoration: none;
 }
@@ -110,13 +119,6 @@ a {
     text-align: center;
     margin-top: 30px;
     color: #777;
-    font-size: 13px;
-}
-
-.message {
-    margin-top: 18px;
-    min-height: 20px;
-    color: #ff8a8a;
     font-size: 13px;
 }
 </style>
@@ -133,7 +135,7 @@ a {
         <h1>Welcome back.</h1>
 
         <p class="subtitle">
-            Sign in to access your BRONE account.
+            Sign in to access your BRONE dashboard.
         </p>
 
         <form id="login-form">
@@ -157,7 +159,7 @@ a {
             >
 
             <button id="login-button" type="submit">
-                SIGN IN
+                LOGIN
             </button>
 
         </form>
@@ -166,7 +168,7 @@ a {
 
         <div class="bottom-text">
             Don't have an account?
-            <a href="signup.html">Create one</a>
+            <a href="signup.html">Create account</a>
         </div>
 
     </div>
@@ -180,45 +182,87 @@ a {
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-    // PASTE THE SAME SUPABASE DETAILS YOU USED IN signup.html
-    const SUPABASE_URL = "https://dvcidwppcmgmivolbeev.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_y-ywXyEcwepxCc5h_uiAFw_sFnJb7L_";
 
-    const supabase = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
+const SUPABASE_URL = "https://dvcidwppcmgmivolbeev.supabase.co";
 
-    const form = document.getElementById("login-form");
-    const message = document.getElementById("message");
-    const button = document.getElementById("login-button");
+const SUPABASE_KEY = "sb_publishable_y-ywXyEcwepxCc5h_uiAFw_sFnJb7L_";
 
-    form.addEventListener("submit", async function(event) {
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
-        event.preventDefault();
+const form = document.getElementById("login-form");
+const message = document.getElementById("message");
+const button = document.getElementById("login-button");
 
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value;
 
-        message.textContent = "";
-        button.disabled = true;
-        button.textContent = "SIGNING IN...";
+form.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    message.style.color = "white";
+    message.textContent = "Logging in...";
+
+    button.disabled = true;
+    button.textContent = "LOGGING IN...";
+
+
+    try {
 
         const { data, error } =
-            await supabase.auth.signInWithPassword({
+            await supabaseClient.auth.signInWithPassword({
+
                 email: email,
                 password: password
+
             });
 
+
         if (error) {
-            message.textContent = error.message;
+
+            message.style.color = "#ff5555";
+            message.textContent = "Error: " + error.message;
+
             button.disabled = false;
-            button.textContent = "SIGN IN";
+            button.textContent = "LOGIN";
+
             return;
+
         }
 
-        window.location.href = "dashboard.html";
-    });
+
+        message.style.color = "#55ff88";
+        message.textContent = "Login successful! Redirecting...";
+
+
+        setTimeout(function() {
+
+            window.location.href = "dashboard.html";
+
+        }, 1000);
+
+
+    } catch (error) {
+
+        message.style.color = "#ff5555";
+
+        message.textContent =
+            "Something went wrong: " + error.message;
+
+        button.disabled = false;
+        button.textContent = "LOGIN";
+
+    }
+
+});
+
 </script>
 
 </body>
