@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | BRONE</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #050505;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 25px;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            letter-spacing: 8px;
+            margin-bottom: 60px;
+        }
+
+        .login-box {
+            border: 1px solid #242424;
+            padding: 45px 35px;
+            background: #0a0a0a;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 35px;
+            font-size: 14px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            background: #111;
+            border: 1px solid #292929;
+            color: white;
+            padding: 15px;
+            margin-bottom: 22px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #777;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: white;
+            color: black;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .bottom-text {
+            text-align: center;
+            margin-top: 28px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="logo">BRONE</div>
+
+        <div class="login-box">
+
+            <h1>Welcome back.</h1>
+
+            <p class="subtitle">
+                Sign in to access your BRONE account.
+            </p>
+
+            <form>
+
+                <label>EMAIL ADDRESS</label>
+
+                <input
+                    type="email"
+                    placeholder="you@example.com"
+                    required
+                >
+
+                <label>PASSWORD</label>
+
+                <input
+                    type="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+                <button type="submit">
+                    SIGN IN
+                </button>
+
+            </form>
+
+            <div class="bottom-text">
+
+                Don't have an account?
+
+                <a href="signup.html">
+                    Create one
+                </a>
+
+            </div>
+
+        </div>
+
+        <a href="index.html" class="back">
+            ← Back to BRONE
+        </a>
+
+    </div>
+
+</body>
+</html>
