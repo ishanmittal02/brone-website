@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | BRONE</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #050505;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 25px;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            letter-spacing: 8px;
+            margin-bottom: 50px;
+        }
+
+        .signup-box {
+            border: 1px solid #242424;
+            padding: 45px 35px;
+            background: #0a0a0a;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 35px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        label {
+            display: block;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            color: #aaa;
+            margin-bottom: 9px;
+        }
+
+        input {
+            width: 100%;
+            background: #111;
+            border: 1px solid #292929;
+            color: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #777;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: white;
+            color: black;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .bottom-text {
+            text-align: center;
+            margin-top: 28px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .bottom-text a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .terms {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.6;
+            margin-top: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">BRONE</div>
+
+    <div class="signup-box">
+
+        <h1>Create account.</h1>
+
+        <p class="subtitle">
+            Join BRONE and access market insights, research and your personal dashboard.
+        </p>
+
+        <form>
+
+            <label>FULL NAME</label>
+            <input type="text" placeholder="Enter your full name" required>
+
+            <label>EMAIL ADDRESS</label>
+            <input type="email" placeholder="you@example.com" required>
+
+            <label>PASSWORD</label>
+            <input type="password" placeholder="Create a password" required>
+
+            <label>CONFIRM PASSWORD</label>
+            <input type="password" placeholder="Confirm your password" required>
+
+            <button type="submit">
+                CREATE ACCOUNT
+            </button>
+
+        </form>
+
+        <p class="terms">
+            By creating an account, you agree to BRONE's Terms and Privacy Policy.
+        </p>
+
+        <div class="bottom-text">
+            Already have an account?
+            <a href="login.html">Sign in</a>
+        </div>
+
+    </div>
+
+    <a href="index.html" class="back">
+        ← Back to BRONE
+    </a>
+
+</div>
+
+</body>
+</html>
