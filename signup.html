@@ -7,7 +7,12 @@
 <title>Create Account | BRONE</title>
 
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -39,7 +44,10 @@ body {
     background: #0a0a0a;
 }
 
-h1 { font-size: 32px; margin-bottom: 10px; }
+h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
 
 .subtitle {
     color: #777;
@@ -67,7 +75,9 @@ input {
     outline: none;
 }
 
-input:focus { border-color: #777; }
+input:focus {
+    border-color: #777;
+}
 
 button {
     width: 100%;
@@ -92,8 +102,7 @@ button:disabled {
     font-size: 14px;
 }
 
-.bottom-text a,
-.back {
+.bottom-text a {
     color: white;
     text-decoration: none;
 }
@@ -104,13 +113,15 @@ button:disabled {
     margin-top: 30px;
     color: #777;
     font-size: 13px;
+    text-decoration: none;
 }
 
 .message {
     margin-top: 18px;
     font-size: 13px;
     line-height: 1.5;
-    min-height: 20px;
+    min-height: 25px;
+    text-align: center;
 }
 
 .terms {
@@ -120,6 +131,7 @@ button:disabled {
     margin-top: 18px;
     text-align: center;
 }
+
 </style>
 </head>
 
@@ -140,20 +152,38 @@ button:disabled {
         <form id="signup-form">
 
             <label>FULL NAME</label>
-            <input id="fullname" type="text"
-                   placeholder="Enter your full name" required>
+            <input
+                id="fullname"
+                type="text"
+                placeholder="Enter your full name"
+                required
+            >
 
             <label>EMAIL ADDRESS</label>
-            <input id="email" type="email"
-                   placeholder="you@example.com" required>
+            <input
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                required
+            >
 
             <label>PASSWORD</label>
-            <input id="password" type="password"
-                   placeholder="Create a password" minlength="6" required>
+            <input
+                id="password"
+                type="password"
+                placeholder="Create a password"
+                minlength="6"
+                required
+            >
 
             <label>CONFIRM PASSWORD</label>
-            <input id="confirm-password" type="password"
-                   placeholder="Confirm your password" minlength="6" required>
+            <input
+                id="confirm-password"
+                type="password"
+                placeholder="Confirm your password"
+                minlength="6"
+                required
+            >
 
             <button id="signup-button" type="submit">
                 CREATE ACCOUNT
@@ -180,65 +210,147 @@ button:disabled {
 
 </div>
 
+
+<!-- SUPABASE -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-    
-    const SUPABASE_URL = "https://dvcidwppcmgmivolbeev.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_y-ywXyEcwepxCc5h_uiAFw_sFnJb7L_";
 
-    const supabase = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
+const SUPABASE_URL = "https://dvciwdppcmgivolbeev.supabase.co";
 
-    const form = document.getElementById("signup-form");
-    const message = document.getElementById("message");
-    const button = document.getElementById("signup-button");
+const SUPABASE_KEY = "sb_publishable_y-wXyEcwepxCc5h_uiAFw_sFnJb7L_";
 
-    form.addEventListener("submit", async function(event) {
 
-        event.preventDefault();
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
-        const fullname = document.getElementById("fullname").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value;
-        const confirmPassword =
-            document.getElementById("confirm-password").value;
 
-        if (password !== confirmPassword) {
-            message.textContent = "Passwords do not match.";
-            return;
-        }
+const form = document.getElementById("signup-form");
 
-        message.textContent = "";
-        button.disabled = true;
-        button.textContent = "CREATING ACCOUNT...";
+const message = document.getElementById("message");
 
-        const { data, error } = await supabase.auth.signUp({
-            email: email,
-            password: password,
-            options: {
-                data: {
-                    full_name: fullname
-                }
-            }
-        });
+const button = document.getElementById("signup-button");
 
-        if (error) {
-            message.textContent = error.message;
-            button.disabled = false;
-            button.textContent = "CREATE ACCOUNT";
-            return;
-        }
+
+form.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+
+    const fullname =
+        document.getElementById("fullname").value.trim();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const confirmPassword =
+        document.getElementById("confirm-password").value;
+
+
+    /* CHECK PASSWORD */
+
+    if (password !== confirmPassword) {
+
+        message.style.color = "#ff5555";
 
         message.textContent =
-            "Account created successfully. Please check your email to verify your account.";
+            "Passwords do not match.";
+
+        return;
+    }
+
+
+    /* LOADING */
+
+    message.style.color = "white";
+
+    message.textContent =
+        "Creating your BRONE account...";
+
+    button.disabled = true;
+
+    button.textContent =
+        "CREATING ACCOUNT...";
+
+
+    try {
+
+        const { data, error } =
+            await supabaseClient.auth.signUp({
+
+                email: email,
+
+                password: password,
+
+                options: {
+
+                    data: {
+
+                        full_name: fullname
+
+                    }
+
+                }
+
+            });
+
+
+        /* ERROR */
+
+        if (error) {
+
+            message.style.color = "#ff5555";
+
+            message.textContent =
+                "Error: " + error.message;
+
+            button.disabled = false;
+
+            button.textContent =
+                "CREATE ACCOUNT";
+
+            return;
+
+        }
+
+
+        /* SUCCESS */
+
+        message.style.color = "#55ff88";
+
+        message.textContent =
+            "Account created successfully! Please check your email for verification.";
 
         form.reset();
+
         button.disabled = false;
-        button.textContent = "CREATE ACCOUNT";
-    });
+
+        button.textContent =
+            "CREATE ACCOUNT";
+
+
+    } catch (error) {
+
+        message.style.color = "#ff5555";
+
+        message.textContent =
+            "Something went wrong: " + error.message;
+
+        button.disabled = false;
+
+        button.textContent =
+            "CREATE ACCOUNT";
+
+    }
+
+});
+
 </script>
 
 </body>
