@@ -1,174 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login | BRONE</title>
+<title>Login | BRONE</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #050505;
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #050505;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .container {
-            width: 100%;
-            max-width: 420px;
-            padding: 25px;
-        }
+.container {
+    width: 100%;
+    max-width: 420px;
+    padding: 25px;
+}
 
-        .logo {
-            text-align: center;
-            font-size: 30px;
-            font-weight: bold;
-            letter-spacing: 8px;
-            margin-bottom: 60px;
-        }
+.logo {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 8px;
+    margin-bottom: 60px;
+}
 
-        .login-box {
-            border: 1px solid #242424;
-            padding: 45px 35px;
-            background: #0a0a0a;
-        }
+.login-box {
+    border: 1px solid #242424;
+    padding: 45px 35px;
+    background: #0a0a0a;
+}
 
-        h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
+h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
 
-        .subtitle {
-            color: #777;
-            margin-bottom: 35px;
-            font-size: 14px;
-        }
+.subtitle {
+    color: #777;
+    margin-bottom: 35px;
+    font-size: 14px;
+}
 
-        label {
-            display: block;
-            font-size: 12px;
-            letter-spacing: 1px;
-            color: #aaa;
-            margin-bottom: 10px;
-        }
+label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #aaa;
+    margin-bottom: 10px;
+}
 
-        input {
-            width: 100%;
-            background: #111;
-            border: 1px solid #292929;
-            color: white;
-            padding: 15px;
-            margin-bottom: 22px;
-            font-size: 15px;
-            outline: none;
-        }
+input {
+    width: 100%;
+    background: #111;
+    border: 1px solid #292929;
+    color: white;
+    padding: 15px;
+    margin-bottom: 22px;
+    font-size: 15px;
+    outline: none;
+}
 
-        input:focus {
-            border-color: #777;
-        }
+input:focus {
+    border-color: #777;
+}
 
-        button {
-            width: 100%;
-            padding: 16px;
-            background: white;
-            color: black;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 5px;
-        }
+button {
+    width: 100%;
+    padding: 16px;
+    background: white;
+    color: black;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+}
 
-        button:hover {
-            opacity: 0.9;
-        }
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
 
-        .bottom-text {
-            text-align: center;
-            margin-top: 28px;
-            color: #777;
-            font-size: 14px;
-        }
+.bottom-text {
+    text-align: center;
+    margin-top: 28px;
+    color: #777;
+    font-size: 14px;
+}
 
-        a {
-            color: white;
-            text-decoration: none;
-        }
+a {
+    color: white;
+    text-decoration: none;
+}
 
-        .back {
-            display: block;
-            text-align: center;
-            margin-top: 30px;
-            color: #777;
-            font-size: 13px;
-        }
-    </style>
+.back {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    color: #777;
+    font-size: 13px;
+}
+
+.message {
+    margin-top: 18px;
+    min-height: 20px;
+    color: #ff8a8a;
+    font-size: 13px;
+}
+</style>
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <div class="logo">BRONE</div>
+    <div class="logo">BRONE</div>
 
-        <div class="login-box">
+    <div class="login-box">
 
-            <h1>Welcome back.</h1>
+        <h1>Welcome back.</h1>
 
-            <p class="subtitle">
-                Sign in to access your BRONE account.
-            </p>
+        <p class="subtitle">
+            Sign in to access your BRONE account.
+        </p>
 
-            <form>
+        <form id="login-form">
 
-                <label>EMAIL ADDRESS</label>
+            <label>EMAIL ADDRESS</label>
 
-                <input
-                    type="email"
-                    placeholder="you@example.com"
-                    required
-                >
+            <input
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                required
+            >
 
-                <label>PASSWORD</label>
+            <label>PASSWORD</label>
 
-                <input
-                    type="password"
-                    placeholder="Enter your password"
-                    required
-                >
+            <input
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                required
+            >
 
-                <button type="submit">
-                    SIGN IN
-                </button>
+            <button id="login-button" type="submit">
+                SIGN IN
+            </button>
 
-            </form>
+        </form>
 
-            <div class="bottom-text">
+        <div id="message" class="message"></div>
 
-                Don't have an account?
-
-                <a href="signup.html">
-                    Create one
-                </a>
-
-            </div>
-
+        <div class="bottom-text">
+            Don't have an account?
+            <a href="signup.html">Create one</a>
         </div>
 
-        <a href="index.html" class="back">
-            ← Back to BRONE
-        </a>
-
     </div>
+
+    <a href="index.html" class="back">
+        ← Back to BRONE
+    </a>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+    // PASTE THE SAME SUPABASE DETAILS YOU USED IN signup.html
+    const SUPABASE_URL = "https://dvcidwppcmgmivolbeev.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_y-ywXyEcwepxCc5h_uiAFw_sFnJb7L_";
+
+    const supabase = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+    const form = document.getElementById("login-form");
+    const message = document.getElementById("message");
+    const button = document.getElementById("login-button");
+
+    form.addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+
+        message.textContent = "";
+        button.disabled = true;
+        button.textContent = "SIGNING IN...";
+
+        const { data, error } =
+            await supabase.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+
+        if (error) {
+            message.textContent = error.message;
+            button.disabled = false;
+            button.textContent = "SIGN IN";
+            return;
+        }
+
+        window.location.href = "dashboard.html";
+    });
+</script>
 
 </body>
 </html>
