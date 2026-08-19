@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,472 +8,329 @@
 
 <style>
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-:root {
-    --bg: #050505;
-    --panel: #0b0b0b;
-    --border: #222;
-    --text: #ffffff;
-    --muted: #777;
-    --dim: #444;
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#050505;
+    color:white;
+    min-height:100vh;
 }
 
-body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: Arial, Helvetica, sans-serif;
-    min-height: 100vh;
+#loading-screen{
+    position:fixed;
+    inset:0;
+    background:#050505;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    font-size:12px;
+    letter-spacing:3px;
 }
 
-/* BACKGROUND */
-
-.background-grid {
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    pointer-events: none;
+.background-grid{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-2;
 
     background-image:
-        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
 
-    background-size: 60px 60px;
+    background-size:60px 60px;
 }
 
-.glow {
-    position: fixed;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background: white;
-    filter: blur(180px);
-    opacity: 0.035;
-    z-index: -1;
-    top: -250px;
-    right: -150px;
+nav{
+    height:75px;
+    border-bottom:1px solid #222;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    background:rgba(5,5,5,.9);
+    backdrop-filter:blur(15px);
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
-/* NAVIGATION */
-
-nav {
-    height: 75px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 6%;
-    background: rgba(5,5,5,0.85);
-    backdrop-filter: blur(15px);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+.logo{
+    color:white;
+    text-decoration:none;
+    font-size:24px;
+    font-weight:bold;
+    letter-spacing:7px;
 }
 
-.logo {
-    color: white;
-    text-decoration: none;
-    font-size: 24px;
-    font-weight: bold;
-    letter-spacing: 7px;
+.user-area{
+    display:flex;
+    align-items:center;
+    gap:20px;
 }
 
-.user-area {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.user-info{
+    text-align:right;
 }
 
-.user-info {
-    text-align: right;
+.user-name{
+    font-size:13px;
 }
 
-.user-name {
-    font-size: 13px;
+.user-email{
+    font-size:11px;
+    color:#777;
+    margin-top:4px;
 }
 
-.user-email {
-    color: var(--muted);
-    font-size: 11px;
-    margin-top: 4px;
+.logout{
+    background:transparent;
+    color:white;
+    border:1px solid #333;
+    padding:10px 16px;
+    cursor:pointer;
+    font-size:10px;
+    letter-spacing:1px;
 }
 
-.logout {
-    background: transparent;
-    color: white;
-    border: 1px solid #333;
-    padding: 11px 17px;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    cursor: pointer;
-    transition: 0.3s;
+.logout:hover{
+    background:white;
+    color:black;
 }
 
-.logout:hover {
-    background: white;
-    color: black;
-    border-color: white;
+.dashboard{
+    max-width:1300px;
+    margin:auto;
+    padding:70px 6%;
 }
 
-/* DASHBOARD */
-
-.dashboard {
-    max-width: 1450px;
-    margin: auto;
-    padding: 70px 6%;
+.eyebrow{
+    color:#777;
+    font-size:10px;
+    letter-spacing:4px;
 }
 
-.eyebrow {
-    color: var(--muted);
-    font-size: 10px;
-    letter-spacing: 4px;
+h1{
+    font-size:clamp(45px,7vw,85px);
+    letter-spacing:-5px;
+    margin-top:15px;
 }
 
-h1 {
-    font-size: clamp(45px, 7vw, 90px);
-    letter-spacing: -5px;
-    margin-top: 18px;
-    line-height: 0.95;
+.subtitle{
+    color:#777;
+    margin-top:20px;
+    line-height:1.7;
+    max-width:650px;
 }
 
-.subtitle {
-    color: var(--muted);
-    max-width: 650px;
-    line-height: 1.8;
-    margin-top: 25px;
+.section{
+    margin-top:70px;
 }
 
-/* STATUS */
-
-.status-bar {
-    margin-top: 55px;
-    border: 1px solid var(--border);
-    background: rgba(10,10,10,0.8);
-    padding: 16px 22px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 11px;
-    color: var(--muted);
+.section-header{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    border-bottom:1px solid #222;
+    padding-bottom:18px;
+    margin-bottom:25px;
 }
 
-.status-dot {
-    width: 7px;
-    height: 7px;
-    background: white;
-    border-radius: 50%;
-    box-shadow: 0 0 12px white;
+.section-title{
+    font-size:26px;
 }
 
-.status-text {
-    letter-spacing: 1px;
+.section-label{
+    color:#666;
+    font-size:10px;
+    letter-spacing:2px;
 }
 
-/* STATS */
+/* MARKET ANALYSIS */
 
-.stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    margin-top: 15px;
+.analysis-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
 }
 
-.stat-card {
-    background: rgba(10,10,10,0.85);
-    border: 1px solid var(--border);
-    padding: 28px;
-    min-height: 180px;
-    transition: 0.3s;
+.analysis-card{
+    border:1px solid #222;
+    background:#0a0a0a;
+    padding:30px;
+    transition:.3s;
 }
 
-.stat-card:hover {
-    transform: translateY(-5px);
-    border-color: #555;
+.analysis-card:hover{
+    border-color:#555;
+    transform:translateY(-3px);
 }
 
-.stat-label {
-    color: var(--muted);
-    font-size: 10px;
-    letter-spacing: 2px;
+.card-market{
+    color:#777;
+    font-size:10px;
+    letter-spacing:2px;
 }
 
-.stat-value {
-    font-size: 38px;
-    margin-top: 45px;
-    letter-spacing: -2px;
+.card-title{
+    font-size:22px;
+    margin-top:15px;
 }
 
-.stat-info {
-    color: var(--dim);
-    font-size: 11px;
-    margin-top: 10px;
+.card-content{
+    color:#888;
+    font-size:13px;
+    line-height:1.7;
+    margin-top:18px;
+    white-space:pre-wrap;
 }
 
-/* GRID */
-
-.main-grid {
-    display: grid;
-    grid-template-columns: 1.8fr 1fr;
-    gap: 15px;
-    margin-top: 15px;
+.card-date{
+    color:#555;
+    font-size:10px;
+    margin-top:25px;
 }
 
-.panel {
-    border: 1px solid var(--border);
-    background: rgba(10,10,10,0.85);
-    padding: 32px;
+/* TRADE SETUPS */
+
+.trade-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
 }
 
-.panel-title {
-    color: var(--muted);
-    font-size: 10px;
-    letter-spacing: 2.5px;
+.trade-card{
+    border:1px solid #222;
+    background:#0a0a0a;
+    padding:28px;
 }
 
-.panel-subtitle {
-    font-size: 22px;
-    margin-top: 12px;
+.trade-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-/* CHART */
-
-.chart-area {
-    height: 320px;
-    margin-top: 35px;
-    position: relative;
-    border-bottom: 1px solid #222;
-    border-left: 1px solid #222;
-    overflow: hidden;
+.asset{
+    font-size:22px;
 }
 
-.chart-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-    background-size: 20% 25%;
+.direction{
+    border:1px solid #444;
+    padding:6px 10px;
+    font-size:10px;
+    letter-spacing:1px;
 }
 
-.chart-area svg {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    z-index: 2;
+.trade-info{
+    margin-top:28px;
+    border-top:1px solid #222;
 }
 
-.chart-line {
-    fill: none;
-    stroke: white;
-    stroke-width: 2.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 1500;
-    stroke-dashoffset: 1500;
-    animation: drawChart 3s ease forwards;
+.trade-row{
+    display:flex;
+    justify-content:space-between;
+    padding:13px 0;
+    border-bottom:1px solid #222;
+    font-size:12px;
 }
 
-@keyframes drawChart {
-    to {
-        stroke-dashoffset: 0;
-    }
+.trade-label{
+    color:#666;
 }
 
-/* WATCHLIST */
-
-.watchlist {
-    margin-top: 25px;
+.trade-value{
+    color:white;
 }
 
-.watch-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #222;
-    padding: 20px 0;
+.trade-status{
+    margin-top:20px;
+    color:#aaa;
+    font-size:10px;
+    letter-spacing:1px;
 }
 
-.watch-item:last-child {
-    border-bottom: none;
-}
-
-.asset-name {
-    font-size: 15px;
-}
-
-.asset-symbol {
-    color: var(--muted);
-    font-size: 10px;
-    letter-spacing: 1px;
-    margin-top: 5px;
-}
-
-.asset-right {
-    text-align: right;
-}
-
-.asset-price {
-    font-size: 14px;
-}
-
-.asset-status {
-    color: var(--dim);
-    font-size: 10px;
-    margin-top: 6px;
+.trade-analysis{
+    margin-top:18px;
+    color:#777;
+    font-size:12px;
+    line-height:1.6;
 }
 
 /* RESEARCH */
 
-.research-section {
-    margin-top: 15px;
+.research-list{
+    border-top:1px solid #222;
 }
 
-.research-list {
-    margin-top: 25px;
-    border-top: 1px solid #222;
+.research-item{
+    border-bottom:1px solid #222;
+    padding:28px 15px;
 }
 
-.research-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 0;
-    border-bottom: 1px solid #222;
-    transition: 0.3s;
+.research-category{
+    color:#666;
+    font-size:10px;
+    letter-spacing:2px;
 }
 
-.research-item:hover {
-    padding-left: 12px;
-    background: rgba(255,255,255,0.015);
+.research-title{
+    font-size:21px;
+    margin-top:10px;
 }
 
-.research-left {
-    display: flex;
-    align-items: center;
-    gap: 25px;
+.research-content{
+    color:#777;
+    line-height:1.7;
+    font-size:13px;
+    margin-top:15px;
+    white-space:pre-wrap;
 }
 
-.research-number {
-    color: #444;
-    font-size: 11px;
+.empty{
+    border:1px dashed #333;
+    padding:40px;
+    color:#666;
+    font-size:13px;
 }
 
-.research-tag {
-    color: var(--muted);
-    font-size: 9px;
-    letter-spacing: 2px;
-}
+@media(max-width:900px){
 
-.research-title {
-    margin-top: 8px;
-    font-size: 17px;
-}
+    .analysis-grid{
+        grid-template-columns:1fr;
+    }
 
-.coming-soon {
-    color: #555;
-    font-size: 10px;
-    letter-spacing: 1px;
-}
-
-/* QUICK ACTIONS */
-
-.actions {
-    margin-top: 15px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-}
-
-.action-card {
-    border: 1px solid var(--border);
-    padding: 28px;
-    min-height: 150px;
-    background: rgba(10,10,10,0.85);
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.action-card:hover {
-    border-color: white;
-    transform: translateY(-4px);
-}
-
-.action-number {
-    color: #555;
-    font-size: 10px;
-}
-
-.action-title {
-    margin-top: 45px;
-    font-size: 18px;
-}
-
-.action-text {
-    color: var(--muted);
-    font-size: 11px;
-    margin-top: 8px;
-}
-
-/* LOADING */
-
-#loading-screen {
-    position: fixed;
-    inset: 0;
-    background: #050505;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    font-size: 12px;
-    letter-spacing: 3px;
-}
-
-/* MOBILE */
-
-@media(max-width: 1000px) {
-
-    .stats {
-        grid-template-columns: repeat(2, 1fr);
+    .trade-grid{
+        grid-template-columns:1fr;
     }
 
 }
 
-@media(max-width: 750px) {
+@media(max-width:600px){
 
-    nav {
-        padding: 0 20px;
+    nav{
+        padding:0 20px;
     }
 
-    .dashboard {
-        padding: 50px 20px;
+    .dashboard{
+        padding:50px 20px;
     }
 
-    .main-grid {
-        grid-template-columns: 1fr;
+    .user-info{
+        display:none;
     }
 
-    .actions {
-        grid-template-columns: 1fr;
+    .section-header{
+        display:block;
     }
 
-    .user-info {
-        display: none;
-    }
-
-    .stats {
-        grid-template-columns: 1fr;
-    }
-
-    .research-left {
-        gap: 12px;
-    }
-
-    .research-title {
-        font-size: 14px;
+    .section-label{
+        margin-top:10px;
     }
 
 }
@@ -484,10 +340,11 @@ h1 {
 
 <body>
 
-<div id="loading-screen">LOADING BRONE...</div>
+<div id="loading-screen">
+    LOADING BRONE...
+</div>
 
 <div class="background-grid"></div>
-<div class="glow"></div>
 
 <nav>
 
@@ -496,7 +353,10 @@ h1 {
     <div class="user-area">
 
         <div class="user-info">
-            <div class="user-name" id="user-name">Loading...</div>
+            <div class="user-name" id="user-name">
+                Loading...
+            </div>
+
             <div class="user-email" id="user-email"></div>
         </div>
 
@@ -507,6 +367,7 @@ h1 {
     </div>
 
 </nav>
+
 
 <main class="dashboard">
 
@@ -519,392 +380,491 @@ h1 {
     </h1>
 
     <p class="subtitle">
-        Your personal workspace for market research, analysis and future BRONE platform features.
+        Market intelligence, trade setups and research published by BRONE.
     </p>
 
-    <div class="status-bar">
 
-        <div class="status-dot"></div>
+    <!-- MARKET ANALYSIS -->
 
-        <div class="status-text">
-            ACCOUNT ACTIVE • BRONE PLATFORM CONNECTED
-        </div>
+    <section class="section">
 
-    </div>
+        <div class="section-header">
 
-    <div class="stats">
-
-        <div class="stat-card">
-
-            <div class="stat-label">ACCOUNT STATUS</div>
-
-            <div class="stat-value">ACTIVE</div>
-
-            <div class="stat-info">Supabase authenticated</div>
-
-        </div>
-
-        <div class="stat-card">
-
-            <div class="stat-label">MARKETS TRACKED</div>
-
-            <div class="stat-value">04</div>
-
-            <div class="stat-info">Watchlist available</div>
-
-        </div>
-
-        <div class="stat-card">
-
-            <div class="stat-label">RESEARCH</div>
-
-            <div class="stat-value">03</div>
-
-            <div class="stat-info">Reports in development</div>
-
-        </div>
-
-        <div class="stat-card">
-
-            <div class="stat-label">MEMBER SINCE</div>
-
-            <div class="stat-value" id="member-year">—</div>
-
-            <div class="stat-info">BRONE member</div>
-
-        </div>
-
-    </div>
-
-    <div class="main-grid">
-
-        <div class="panel">
-
-            <div class="panel-title">
-                MARKET OVERVIEW
+            <div class="section-title">
+                Market Analysis
             </div>
 
-            <div class="panel-subtitle">
-                Market Intelligence
-            </div>
-
-            <div class="chart-area">
-
-                <div class="chart-grid"></div>
-
-                <svg viewBox="0 0 1000 300" preserveAspectRatio="none">
-
-                    <polyline
-                        class="chart-line"
-                        points="
-                        0,250
-                        70,225
-                        140,235
-                        210,185
-                        280,205
-                        350,140
-                        420,175
-                        490,110
-                        560,145
-                        630,85
-                        700,120
-                        770,65
-                        840,95
-                        910,35
-                        1000,55
-                        ">
-                    </polyline>
-
-                </svg>
-
+            <div class="section-label">
+                LATEST INSIGHTS
             </div>
 
         </div>
 
-        <div class="panel">
+        <div id="analysis-container" class="analysis-grid">
 
-            <div class="panel-title">
-                WATCHLIST
-            </div>
-
-            <div class="watchlist">
-
-                <div class="watch-item">
-
-                    <div>
-                        <div class="asset-name">Gold</div>
-                        <div class="asset-symbol">XAUUSD</div>
-                    </div>
-
-                    <div class="asset-right">
-                        <div class="asset-price">MARKET</div>
-                        <div class="asset-status">LIVE DATA SOON</div>
-                    </div>
-
-                </div>
-
-                <div class="watch-item">
-
-                    <div>
-                        <div class="asset-name">S&P 500</div>
-                        <div class="asset-symbol">SPX</div>
-                    </div>
-
-                    <div class="asset-right">
-                        <div class="asset-price">MARKET</div>
-                        <div class="asset-status">LIVE DATA SOON</div>
-                    </div>
-
-                </div>
-
-                <div class="watch-item">
-
-                    <div>
-                        <div class="asset-name">Bitcoin</div>
-                        <div class="asset-symbol">BTCUSD</div>
-                    </div>
-
-                    <div class="asset-right">
-                        <div class="asset-price">MARKET</div>
-                        <div class="asset-status">LIVE DATA SOON</div>
-                    </div>
-
-                </div>
-
-                <div class="watch-item">
-
-                    <div>
-                        <div class="asset-name">Indian Markets</div>
-                        <div class="asset-symbol">NIFTY</div>
-                    </div>
-
-                    <div class="asset-right">
-                        <div class="asset-price">MARKET</div>
-                        <div class="asset-status">LIVE DATA SOON</div>
-                    </div>
-
-                </div>
-
+            <div class="empty">
+                Loading market analysis...
             </div>
 
         </div>
 
-    </div>
+    </section>
 
-    <div class="panel research-section">
 
-        <div class="panel-title">
-            LATEST RESEARCH
-        </div>
+    <!-- TRADE SETUPS -->
 
-        <div class="research-list">
+    <section class="section">
 
-            <div class="research-item">
+        <div class="section-header">
 
-                <div class="research-left">
-
-                    <div class="research-number">01</div>
-
-                    <div>
-                        <div class="research-tag">MACRO</div>
-                        <div class="research-title">
-                            Global Economic Outlook
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="coming-soon">
-                    COMING SOON →
-                </div>
-
+            <div class="section-title">
+                Active Trade Setups
             </div>
 
-            <div class="research-item">
-
-                <div class="research-left">
-
-                    <div class="research-number">02</div>
-
-                    <div>
-                        <div class="research-tag">COMMODITIES</div>
-                        <div class="research-title">
-                            Gold & Commodity Market Analysis
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="coming-soon">
-                    COMING SOON →
-                </div>
-
-            </div>
-
-            <div class="research-item">
-
-                <div class="research-left">
-
-                    <div class="research-number">03</div>
-
-                    <div>
-                        <div class="research-tag">STRATEGY</div>
-                        <div class="research-title">
-                            Risk Management Framework
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="coming-soon">
-                    COMING SOON →
-                </div>
-
+            <div class="section-label">
+                BRONE MARKET IDEAS
             </div>
 
         </div>
 
-    </div>
+        <div id="trades-container" class="trade-grid">
 
-    <div class="actions">
-
-        <div class="action-card">
-
-            <div class="action-number">01</div>
-
-            <div class="action-title">
-                Markets
-            </div>
-
-            <div class="action-text">
-                Explore market insights.
+            <div class="empty">
+                Loading trade setups...
             </div>
 
         </div>
 
-        <div class="action-card">
+    </section>
 
-            <div class="action-number">02</div>
 
-            <div class="action-title">
-                Research
+    <!-- RESEARCH -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+                BRONE Research
             </div>
 
-            <div class="action-text">
-                View BRONE research reports.
-            </div>
-
-        </div>
-
-        <div class="action-card">
-
-            <div class="action-number">03</div>
-
-            <div class="action-title">
-                Portfolio
-            </div>
-
-            <div class="action-text">
-                Future portfolio features.
+            <div class="section-label">
+                LATEST RESEARCH
             </div>
 
         </div>
 
-    </div>
+        <div id="research-container" class="research-list">
+
+            <div class="empty">
+                Loading research...
+            </div>
+
+        </div>
+
+    </section>
 
 </main>
 
-
-<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
 const SUPABASE_URL =
-    "https://dvcidwppcmgmivolbeev.supabase.co";
+"https://dvcidwppcmgmivolbeev.supabase.co";
 
 const SUPABASE_KEY =
-    "sb_publishable_y-ywXyEcwepxCc5h_uiAFw_sFnJb7L_";
-
+"sb_publishable_y-ywXyEcwepxCc5h_uiAFw_sFnJb7L_";
 
 const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 
-async function checkUser() {
+/* ===============================
+AUTHENTICATION
+================================ */
 
-    try {
+async function checkUser(){
 
-        const {
-            data: { user },
-            error
-        } = await supabaseClient.auth.getUser();
-
-
-        if (error || !user) {
-
-            window.location.replace("login.html");
-
-            return;
-
-        }
+    const {
+        data:{user},
+        error
+    } = await supabaseClient.auth.getUser();
 
 
-        const fullName =
-            user.user_metadata?.full_name;
-
-        const displayName =
-            fullName || user.email.split("@")[0];
-
-
-        document.getElementById("welcome").textContent =
-            "Welcome, " + displayName + ".";
-
-
-        document.getElementById("user-name").textContent =
-            displayName;
-
-
-        document.getElementById("user-email").textContent =
-            user.email;
-
-
-        const createdDate =
-            new Date(user.created_at);
-
-        document.getElementById("member-year").textContent =
-            createdDate.getFullYear();
-
-
-        document.getElementById("loading-screen")
-            .style.display = "none";
-
-
-    } catch (error) {
+    if(error || !user){
 
         window.location.replace("login.html");
 
+        return;
+
     }
+
+
+    const fullName =
+    user.user_metadata?.full_name;
+
+
+    const displayName =
+    fullName || user.email.split("@")[0];
+
+
+    document.getElementById("welcome").textContent =
+    "Welcome, " + displayName + ".";
+
+
+    document.getElementById("user-name").textContent =
+    displayName;
+
+
+    document.getElementById("user-email").textContent =
+    user.email;
+
+
+    await loadAnalysis();
+
+    await loadTrades();
+
+    await loadResearch();
+
+
+    document.getElementById("loading-screen")
+    .style.display = "none";
 
 }
 
 
-checkUser();
+/* ===============================
+LOAD MARKET ANALYSIS
+================================ */
 
+async function loadAnalysis(){
+
+    const container =
+    document.getElementById("analysis-container");
+
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+    .from("market_analysis")
+    .select("*")
+    .eq("published",true)
+    .order("created_at",{ascending:false});
+
+
+    if(error){
+
+        container.innerHTML =
+        `<div class="empty">
+        Unable to load market analysis.
+        </div>`;
+
+        return;
+
+    }
+
+
+    if(!data || data.length === 0){
+
+        container.innerHTML =
+        `<div class="empty">
+        No market analysis published yet.
+        </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+    data.map(item => `
+
+        <div class="analysis-card">
+
+            <div class="card-market">
+                ${escapeHTML(item.market || "MARKET")}
+            </div>
+
+            <div class="card-title">
+                ${escapeHTML(item.title)}
+            </div>
+
+            <div class="card-content">
+                ${escapeHTML(item.content || "")}
+            </div>
+
+            <div class="card-date">
+                ${formatDate(item.created_at)}
+            </div>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+/* ===============================
+LOAD TRADE SETUPS
+================================ */
+
+async function loadTrades(){
+
+    const container =
+    document.getElementById("trades-container");
+
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+    .from("trade_setups")
+    .select("*")
+    .eq("published",true)
+    .order("created_at",{ascending:false});
+
+
+    if(error){
+
+        container.innerHTML =
+        `<div class="empty">
+        Unable to load trade setups.
+        </div>`;
+
+        return;
+
+    }
+
+
+    if(!data || data.length === 0){
+
+        container.innerHTML =
+        `<div class="empty">
+        No active trade setups yet.
+        </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+    data.map(trade => `
+
+        <div class="trade-card">
+
+            <div class="trade-top">
+
+                <div class="asset">
+                    ${escapeHTML(trade.asset)}
+                </div>
+
+                <div class="direction">
+                    ${escapeHTML(trade.direction || "")}
+                </div>
+
+            </div>
+
+
+            <div class="trade-info">
+
+                <div class="trade-row">
+                    <span class="trade-label">ENTRY</span>
+                    <span class="trade-value">
+                        ${escapeHTML(trade.entry_price || "—")}
+                    </span>
+                </div>
+
+
+                <div class="trade-row">
+                    <span class="trade-label">STOP LOSS</span>
+                    <span class="trade-value">
+                        ${escapeHTML(trade.stop_loss || "—")}
+                    </span>
+                </div>
+
+
+                <div class="trade-row">
+                    <span class="trade-label">TARGET 1</span>
+                    <span class="trade-value">
+                        ${escapeHTML(trade.target_1 || "—")}
+                    </span>
+                </div>
+
+
+                <div class="trade-row">
+                    <span class="trade-label">TARGET 2</span>
+                    <span class="trade-value">
+                        ${escapeHTML(trade.target_2 || "—")}
+                    </span>
+                </div>
+
+
+                <div class="trade-row">
+                    <span class="trade-label">RISK</span>
+                    <span class="trade-value">
+                        ${escapeHTML(trade.risk_level || "—")}
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="trade-status">
+
+                STATUS: ${escapeHTML(trade.status || "ACTIVE")}
+
+            </div>
+
+
+            ${
+                trade.analysis
+                ?
+                `<div class="trade-analysis">
+                    ${escapeHTML(trade.analysis)}
+                </div>`
+                :
+                ""
+            }
+
+        </div>
+
+    `).join("");
+
+}
+
+
+/* ===============================
+LOAD RESEARCH
+================================ */
+
+async function loadResearch(){
+
+    const container =
+    document.getElementById("research-container");
+
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+    .from("research_articles")
+    .select("*")
+    .eq("published",true)
+    .order("created_at",{ascending:false});
+
+
+    if(error){
+
+        container.innerHTML =
+        `<div class="empty">
+        Unable to load research.
+        </div>`;
+
+        return;
+
+    }
+
+
+    if(!data || data.length === 0){
+
+        container.innerHTML =
+        `<div class="empty">
+        No research articles published yet.
+        </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+    data.map(article => `
+
+        <div class="research-item">
+
+            <div class="research-category">
+
+                ${escapeHTML(article.category || "RESEARCH")}
+
+            </div>
+
+
+            <div class="research-title">
+
+                ${escapeHTML(article.title)}
+
+            </div>
+
+
+            <div class="research-content">
+
+                ${escapeHTML(article.content || "")}
+
+            </div>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+/* ===============================
+HELPER FUNCTIONS
+================================ */
+
+function formatDate(date){
+
+    return new Date(date).toLocaleDateString(
+        "en-US",
+        {
+            year:"numeric",
+            month:"short",
+            day:"numeric"
+        }
+    );
+
+}
+
+
+function escapeHTML(value){
+
+    if(value === null || value === undefined){
+        return "";
+    }
+
+    const div = document.createElement("div");
+
+    div.textContent = value;
+
+    return div.innerHTML;
+
+}
+
+
+/* ===============================
+LOGOUT
+================================ */
 
 document
 .getElementById("logout-button")
-.addEventListener("click", async function() {
+.addEventListener("click",async function(){
 
     await supabaseClient.auth.signOut();
 
     window.location.replace("index.html");
 
 });
+
+
+checkUser();
 
 </script>
 
