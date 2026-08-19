@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Publisher | BRONE</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#050505;
+    color:white;
+}
+
+button,input,textarea,select{
+    font:inherit;
+}
+
+#loading{
+    position:fixed;
+    inset:0;
+    background:#050505;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    letter-spacing:3px;
+    font-size:12px;
+}
+
+nav{
+    height:75px;
+    padding:0 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid #222;
+    background:#080808;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    letter-spacing:7px;
+}
+
+.admin-info{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+#admin-email{
+    color:#777;
+    font-size:12px;
+}
+
+.logout{
+    background:transparent;
+    color:white;
+    border:1px solid #333;
+    padding:10px 16px;
+    cursor:pointer;
+}
+
+.logout:hover{
+    background:white;
+    color:black;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:70px 6%;
+}
+
+.eyebrow{
+    color:#666;
+    font-size:10px;
+    letter-spacing:4px;
+}
+
+h1{
+    font-size:clamp(45px,7vw,90px);
+    letter-spacing:-5px;
+    margin-top:15px;
+}
+
+.subtitle{
+    color:#777;
+    margin-top:20px;
+    line-height:1.7;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin-top:60px;
+}
+
+.panel{
+    background:#0a0a0a;
+    border:1px solid #222;
+    padding:35px;
+}
+
+.panel.full{
+    grid-column:1 / -1;
+}
+
+.panel h2{
+    font-size:24px;
+    margin-bottom:8px;
+}
+
+.panel-desc{
+    color:#666;
+    font-size:13px;
+    margin-bottom:30px;
+}
+
+label{
+    display:block;
+    color:#888;
+    font-size:10px;
+    letter-spacing:1.5px;
+    margin:20px 0 8px;
+}
+
+input,select,textarea{
+    width:100%;
+    background:#111;
+    color:white;
+    border:1px solid #292929;
+    padding:14px;
+    outline:none;
+}
+
+textarea{
+    min-height:150px;
+    resize:vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#777;
+}
+
+.publish-btn{
+    margin-top:25px;
+    background:white;
+    color:black;
+    border:none;
+    padding:15px 25px;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:1px;
+    cursor:pointer;
+}
+
+.publish-btn:hover{
+    opacity:.85;
+}
+
+.message{
+    margin-top:15px;
+    font-size:13px;
+    min-height:20px;
+}
+
+@media(max-width:800px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .panel.full{
+        grid-column:auto;
+    }
+
+    #admin-email{
+        display:none;
+    }
+
+    .container{
+        padding:50px 20px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="loading">VERIFYING ADMIN ACCESS...</div>
+
+<nav>
+
+    <div class="logo">BRONE</div>
+
+    <div class="admin-info">
+        <div id="admin-email"></div>
+
+        <button id="logout-btn" class="logout">
+            LOGOUT
+        </button>
+    </div>
+
+</nav>
+
+<div class="container">
+
+    <div class="eyebrow">
+        BRONE / PUBLISHER
+    </div>
+
+    <h1>Publish.</h1>
+
+    <p class="subtitle">
+        Create and publish market analysis, trade setups and research for BRONE members.
+    </p>
+
+    <div class="grid">
+
+        <!-- MARKET ANALYSIS -->
+
+        <div class="panel">
+
+            <h2>Market Analysis</h2>
+
+            <p class="panel-desc">
+                Publish daily market analysis.
+            </p>
+
+            <form id="analysis-form">
+
+                <label>TITLE</label>
+
+                <input
+                    id="analysis-title"
+                    type="text"
+                    placeholder="Gold Market Outlook"
+                    required
+                >
+
+                <label>MARKET</label>
+
+                <input
+                    id="analysis-market"
+                    type="text"
+                    placeholder="XAUUSD"
+                >
+
+                <label>ACCESS LEVEL</label>
+
+                <select id="analysis-access">
+                    <option value="pro">BRONE PRO</option>
+                    <option value="free">FREE</option>
+                </select>
+
+                <label>ANALYSIS</label>
+
+                <textarea
+                    id="analysis-content"
+                    placeholder="Write your market analysis..."
+                    required
+                ></textarea>
+
+                <button type="submit" class="publish-btn">
+                    PUBLISH ANALYSIS
+                </button>
+
+                <div id="analysis-message" class="message"></div>
+
+            </form>
+
+        </div>
+
+
+        <!-- TRADE SETUP -->
+
+        <div class="panel">
+
+            <h2>Trade Setup</h2>
+
+            <p class="panel-desc">
+                Publish a new BRONE trade idea.
+            </p>
+
+            <form id="trade-form">
+
+                <label>ASSET</label>
+
+                <input
+                    id="trade-asset"
+                    type="text"
+                    placeholder="XAUUSD"
+                    required
+                >
+
+                <label>DIRECTION</label>
+
+                <select id="trade-direction">
+                    <option value="BUY">BUY</option>
+                    <option value="SELL">SELL</option>
+                </select>
+
+                <label>ENTRY PRICE / ZONE</label>
+
+                <input
+                    id="trade-entry"
+                    type="text"
+                    placeholder="Example: 2350 - 2355"
+                >
+
+                <label>STOP LOSS</label>
+
+                <input
+                    id="trade-sl"
+                    type="text"
+                    placeholder="Example: 2340"
+                >
+
+                <label>TARGET 1</label>
+
+                <input
+                    id="trade-tp1"
+                    type="text"
+                    placeholder="Example: 2370"
+                >
+
+                <label>TARGET 2</label>
+
+                <input
+                    id="trade-tp2"
+                    type="text"
+                    placeholder="Example: 2390"
+                >
+
+                <label>RISK LEVEL</label>
+
+                <select id="trade-risk">
+                    <option value="LOW">LOW</option>
+                    <option value="MEDIUM" selected>MEDIUM</option>
+                    <option value="HIGH">HIGH</option>
+                </select>
+
+                <label>ANALYSIS / REASON</label>
+
+                <textarea
+                    id="trade-analysis"
+                    placeholder="Explain the trade setup..."
+                ></textarea>
+
+                <button type="submit" class="publish-btn">
+                    PUBLISH TRADE
+                </button>
+
+                <div id="trade-message" class="message"></div>
+
+            </form>
+
+        </div>
+
+
+        <!-- RESEARCH -->
+
+        <div class="panel full">
+
+            <h2>Research Article</h2>
+
+            <p class="panel-desc">
+                Publish a BRONE research article.
+            </p>
+
+            <form id="research-form">
+
+                <label>TITLE</label>
+
+                <input
+                    id="research-title"
+                    type="text"
+                    placeholder="Why Gold Is Moving This Week"
+                    required
+                >
+
+                <label>CATEGORY</label>
+
+                <select id="research-category">
+                    <option value="MACRO">MACRO</option>
+                    <option value="COMMODITIES">COMMODITIES</option>
+                    <option value="EQUITIES">EQUITIES</option>
+                    <option value="FOREX">FOREX</option>
+                    <option value="CRYPTO">CRYPTO</option>
+                </select>
+
+                <label>ACCESS LEVEL</label>
+
+                <select id="research-access">
+                    <option value="pro">BRONE PRO</option>
+                    <option value="free">FREE</option>
+                </select>
+
+                <label>ARTICLE</label>
+
+                <textarea
+                    id="research-content"
+                    placeholder="Write your research article..."
+                    required
+                ></textarea>
+
+                <button type="submit" class="publish-btn">
+                    PUBLISH RESEARCH
+                </button>
+
+                <div id="research-message" class="message"></div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL = "https://dvcidwppcmgmivolbeev.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_y-ywXyEcwepxCc5h_uiAFw_sFnJb7L_";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+/* =========================
+CHECK ADMIN ACCESS
+========================= */
+
+async function checkAdmin() {
+
+    const {
+        data: { user }
+    } = await supabaseClient.auth.getUser();
+
+
+    if (!user) {
+
+        window.location.replace("login.html");
+
+        return;
+
+    }
+
+
+    const { data: profile, error } =
+        await supabaseClient
+        .from("profiles")
+        .select("role, full_name")
+        .eq("id", user.id)
+        .single();
+
+
+    if (error || !profile || profile.role !== "admin") {
+
+        alert("Access denied. Publisher access only.");
+
+        window.location.replace("dashboard.html");
+
+        return;
+
+    }
+
+
+    document.getElementById("admin-email").textContent =
+        user.email;
+
+
+    document.getElementById("loading").style.display =
+        "none";
+
+}
+
+
+checkAdmin();
+
+
+/* =========================
+PUBLISH MARKET ANALYSIS
+========================= */
+
+document
+.getElementById("analysis-form")
+.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const message =
+        document.getElementById("analysis-message");
+
+
+    const { error } =
+        await supabaseClient
+        .from("market_analysis")
+        .insert({
+
+            title:
+                document.getElementById("analysis-title").value,
+
+            market:
+                document.getElementById("analysis-market").value,
+
+            content:
+                document.getElementById("analysis-content").value,
+
+            access_level:
+                document.getElementById("analysis-access").value,
+
+            published: true
+
+        });
+
+
+    if (error) {
+
+        message.style.color = "#ff5555";
+
+        message.textContent =
+            "Error: " + error.message;
+
+        return;
+
+    }
+
+
+    message.style.color = "#55ff88";
+
+    message.textContent =
+        "Market analysis published successfully!";
+
+    document
+        .getElementById("analysis-form")
+        .reset();
+
+});
+
+
+/* =========================
+PUBLISH TRADE SETUP
+========================= */
+
+document
+.getElementById("trade-form")
+.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const message =
+        document.getElementById("trade-message");
+
+
+    const { error } =
+        await supabaseClient
+        .from("trade_setups")
+        .insert({
+
+            asset:
+                document.getElementById("trade-asset").value,
+
+            direction:
+                document.getElementById("trade-direction").value,
+
+            entry_price:
+                document.getElementById("trade-entry").value,
+
+            stop_loss:
+                document.getElementById("trade-sl").value,
+
+            target_1:
+                document.getElementById("trade-tp1").value,
+
+            target_2:
+                document.getElementById("trade-tp2").value,
+
+            risk_level:
+                document.getElementById("trade-risk").value,
+
+            analysis:
+                document.getElementById("trade-analysis").value,
+
+            status: "ACTIVE",
+
+            published: true
+
+        });
+
+
+    if (error) {
+
+        message.style.color = "#ff5555";
+
+        message.textContent =
+            "Error: " + error.message;
+
+        return;
+
+    }
+
+
+    message.style.color = "#55ff88";
+
+    message.textContent =
+        "Trade setup published successfully!";
+
+    document
+        .getElementById("trade-form")
+        .reset();
+
+});
+
+
+/* =========================
+PUBLISH RESEARCH
+========================= */
+
+document
+.getElementById("research-form")
+.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const message =
+        document.getElementById("research-message");
+
+
+    const { error } =
+        await supabaseClient
+        .from("research_articles")
+        .insert({
+
+            title:
+                document.getElementById("research-title").value,
+
+            category:
+                document.getElementById("research-category").value,
+
+            content:
+                document.getElementById("research-content").value,
+
+            access_level:
+                document.getElementById("research-access").value,
+
+            published: true
+
+        });
+
+
+    if (error) {
+
+        message.style.color = "#ff5555";
+
+        message.textContent =
+            "Error: " + error.message;
+
+        return;
+
+    }
+
+
+    message.style.color = "#55ff88";
+
+    message.textContent =
+        "Research article published successfully!";
+
+    document
+        .getElementById("research-form")
+        .reset();
+
+});
+
+
+/* =========================
+LOGOUT
+========================= */
+
+document
+.getElementById("logout-btn")
+.addEventListener("click", async function() {
+
+    await supabaseClient.auth.signOut();
+
+    window.location.replace("index.html");
+
+});
+
+</script>
+
+</body>
+</html>
